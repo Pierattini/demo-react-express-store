@@ -16,19 +16,18 @@ dotenv.config();
 
 const app = express();
 
-// 🔥 CORS SIEMPRE ARRIBA
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://demo-react-express-store.vercel.app"
-  ],
-  methods: ["GET","POST","PUT","DELETE","OPTIONS"],
-  allowedHeaders: ["Content-Type","Authorization"]
+  origin: "*"
 }));
-app.options("*", cors());
+
 app.use(express.json());
 
-// rutas
+/* 👇 AGREGA ESTO AQUÍ */
+app.get("/", (req, res) => {
+  res.send("API funcionando");
+});
+
+/* rutas */
 app.use("/auth", authRoutes);
 app.use("/api/products", productsRoutes);
 app.use("/users", usersRoutes);
@@ -41,6 +40,7 @@ app.use("/api/upload", uploadRoutes);
 app.use(notFoundMiddleware);
 
 const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
 });
