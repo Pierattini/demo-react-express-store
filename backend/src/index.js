@@ -16,13 +16,20 @@ dotenv.config();
 
 const app = express();
 
+/* CORS */
 app.use(cors({
-  origin: "*"
+  origin: [
+    "https://demo-react-express-store.vercel.app",
+    "http://localhost:5173"
+  ],
+  credentials: true
 }));
+
+app.options("*", cors());
 
 app.use(express.json());
 
-/* 👇 AGREGA ESTO AQUÍ */
+/* test */
 app.get("/", (req, res) => {
   res.send("API funcionando");
 });
