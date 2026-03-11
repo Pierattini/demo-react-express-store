@@ -11,23 +11,20 @@ import reviewsRoutes from "./routes/reviews.routes.js";
 import siteRoutes from "./routes/site.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
 import uploadRoutes from "./routes/upload.routes.js";
-console.log("SERVIDOR EXPRESS INICIANDO...");
+
 dotenv.config();
 
 const app = express();
 
 /* CORS */
 app.use(cors({
-  origin: [
-    "https://demo-react-express-store.vercel.app",
-    "http://localhost:5173"
-  ],
-  credentials: true
+  origin: "*",
+  methods: ["GET","POST","PUT","DELETE","PATCH","OPTIONS"],
+  allowedHeaders: ["Content-Type","Authorization"]
 }));
 
 app.use(express.json());
 
-/* test */
 app.get("/", (req, res) => {
   res.send("API funcionando");
 });
@@ -47,6 +44,5 @@ app.use(notFoundMiddleware);
 const PORT = process.env.PORT;
 
 app.listen(PORT, "0.0.0.0", () => {
-  console.log("Servidor Express iniciado");
-  console.log(`Puerto: ${PORT}`);
+  console.log(`Servidor corriendo en puerto ${PORT}`);
 });
