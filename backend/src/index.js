@@ -18,8 +18,7 @@ const app = express();
 
 // 🔥 CORS SIEMPRE ARRIBA
 app.use(cors({
-  origin: "http://localhost:5173",
-  credentials: true
+  origin: "*"
 }));
 
 app.use(express.json());
