@@ -11,7 +11,7 @@ import reviewsRoutes from "./routes/reviews.routes.js";
 import siteRoutes from "./routes/site.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
 import uploadRoutes from "./routes/upload.routes.js";
-
+console.log("SERVIDOR EXPRESS INICIANDO...");
 dotenv.config();
 
 const app = express();
@@ -47,5 +47,6 @@ app.use(notFoundMiddleware);
 const PORT = process.env.PORT;
 
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Servidor corriendo en puerto ${PORT}`);
+  console.log("Servidor Express iniciado");
+  console.log(`Puerto: ${PORT}`);
 });
