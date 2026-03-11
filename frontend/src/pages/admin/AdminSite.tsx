@@ -5,6 +5,7 @@ import type { SiteConfig } from "../../types/SiteConfig";
 import { CheckCircle2, Image as ImageIcon, Loader2, UploadCloud } from "lucide-react";
 import DashboardLayout from "../../components/layout/DashboardLayout"; 
 import AddressAutocomplete from "../../components/ui/AddressAutocomplete";
+const API = import.meta.env.VITE_API_URL;
 type UploadField = "hero_image" | "about_image" | "logo";
 /* ========= VALIDATIONS ========= */
 const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -285,7 +286,7 @@ export default function AdminSite() {
   try {
     setUploadingField(field); // 🔥 activa loading
 
-    const res = await fetch("http://localhost:3000/api/upload", {
+    const res = await fetch(`${API}/api/upload`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

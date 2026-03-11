@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 export default function OrderSuccess() {
 
   const { t } = useTranslation();
-
+  const API = import.meta.env.VITE_API_URL;
   const location = useLocation();
   const [searchParams] = useSearchParams();
 
@@ -37,8 +37,8 @@ export default function OrderSuccess() {
         if (sessionId) {
 
           const res = await fetch(
-            `http://localhost:3000/api/payments/stripe/order-status?session_id=${sessionId}`
-          );
+  `${API}/api/payments/stripe/order-status?session_id=${sessionId}`
+);
 
           const { orderId } = await res.json();
 

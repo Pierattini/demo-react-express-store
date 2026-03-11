@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import DashboardLayout from "../../components/layout/DashboardLayout";
 import Card from "../../components/ui/Card";
 import { httpGet, httpDelete, httpPut } from "../../lib/http";
-
+const API = import.meta.env.VITE_API_URL;
 interface User {
   id: number;
   name: string;
@@ -79,7 +79,7 @@ export default function AdminUsers() {
 
   async function handleCreateUser() {
     try {
-      await fetch("http://localhost:3000/auth/register", {
+      await fetch(`${API}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newUser),
@@ -103,7 +103,7 @@ export default function AdminUsers() {
   async function handleExportExcel() {
     try {
       const response = await fetch(
-        "http://localhost:3000/users/export/excel",
+  `${API}/users/export/excel`,
         {
           method: "GET",
           headers: {

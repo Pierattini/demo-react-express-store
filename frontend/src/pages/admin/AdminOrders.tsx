@@ -24,7 +24,7 @@ const [editShipping, setEditShipping] = useState<{
   notes?: string;
 } | null>(null);
   //const navigate = useNavigate();
-
+  const API = import.meta.env.VITE_API_URL;
   const loadOrders = async () => {
     try {
       setLoading(true);
@@ -56,7 +56,7 @@ const [editShipping, setEditShipping] = useState<{
   try {
     const token = localStorage.getItem("token");
 
-    await fetch(`http://localhost:3000/orders/${id}/cancel`, {
+    await fetch(`${API}/orders/${id}/cancel`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

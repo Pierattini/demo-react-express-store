@@ -5,7 +5,7 @@ export async function updateSiteConfig(
   token: string
 ): Promise<SiteConfig> {
 
-  const res = await fetch("http://localhost:3000/api/site", {
+  const res = await fetch("https://demo-store-api-o311.onrender.com/api/site", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -19,7 +19,7 @@ export async function updateSiteConfig(
 
 export async function getSiteConfig(): Promise<SiteConfig> {
 
-  const res = await fetch("http://localhost:3000/api/site");
+  const res = await fetch("https://demo-store-api-o311.onrender.com/api/site");
   const data = await res.json();
 
   return {

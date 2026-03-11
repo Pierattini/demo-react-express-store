@@ -4,7 +4,7 @@ import Card from "../../components/ui/Card";
 import Button from "../../components/ui/Button";
 import { getProducts, deleteProduct, updateProduct } from "../../lib/products";
 import type { Product } from "../../lib/types";
-
+const API = import.meta.env.VITE_API_URL;
 type ProductWithFeatured = Product & {
   featured?: boolean;
 };
@@ -21,7 +21,7 @@ export default function AdminProducts() {
 const [editedProduct, setEditedProduct] =
 useState<Partial<EditableProduct>>({});
 
-
+  
   const [openCreateModal, setOpenCreateModal] = useState(false);
  const [variants, setVariants] = useState([
   { color: "#000000", stock: 0, image: null as File | null }
@@ -177,11 +177,11 @@ stock:v.stock
       }
     });
 
-    await fetch("http://localhost:3000/api/products", {
-      method: "POST",
-      body: formData,
-      credentials: "include",
-    });
+    await fetch(`${API}/api/products`, {
+  method: "POST",
+  body: formData,
+  credentials: "include",
+});
 
     await reloadProducts();
 

@@ -13,12 +13,12 @@ type Review = {
 export default function Testimonials() {
 
   const { t } = useTranslation();
-
+  const API = import.meta.env.VITE_API_URL;
   const [reviews, setReviews] = useState<Review[]>([]);
   const [open, setOpen] = useState<number | null>(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/reviews")
+    fetch(`${API}/api/reviews`)
       .then(res => res.json())
       .then(data => setReviews(data))
       .catch(err => console.error(err));
