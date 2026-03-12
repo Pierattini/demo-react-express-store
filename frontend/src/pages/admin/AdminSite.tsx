@@ -345,7 +345,7 @@ export default function AdminSite() {
       return;
     }
 
-    await updateSiteConfig(form, token);
+    await updateSiteConfig(form);
     alert("Guardado correctamente");
   };
 

@@ -60,10 +60,10 @@ export async function http<T>(
   } = options;
 
   const token = auth ? localStorage.getItem("token") : null;
-  console.log("TOKEN EN HTTP:", token);
+  //console.log("TOKEN EN HTTP:", token);
 
   const isFormData = rest.body instanceof FormData;
-console.log("REQUEST URL:", `${API_URL}${url}`);
+//console.log("REQUEST URL:", `${API_URL}${url}`);
 const response = await fetch(`${API_URL}${url}`, {
   method,
   ...rest,
@@ -71,7 +71,7 @@ const response = await fetch(`${API_URL}${url}`, {
   ...(method !== "GET" && !isFormData
     ? { "Content-Type": "application/json" }
     : {}),
-  ...(token ? { Authorization: `Bearer ${token}` } : {}),
+  ...(auth && token ? { Authorization: `Bearer ${token}` } : {}),
   ...(headers || {}),
 },
 });
@@ -115,7 +115,7 @@ const response = await fetch(`${API_URL}${url}`, {
 ====================================================== */
 
 // GET
-export function httpGet<T>(url: string, auth = true) {
+export function httpGet<T>(url: string, auth = false) {
   return http<T>(url, { method: "GET", auth });
 }
 

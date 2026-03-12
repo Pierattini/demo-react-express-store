@@ -2,7 +2,7 @@ import { httpGet, httpPost, httpPut, httpDelete } from "./http";
 import type { Product } from "./types";
 
 export function getProducts() {
-  return httpGet<Product[]>("/api/products");
+  return httpGet<Product[]>("/api/products", false);
 }
 
 export function createProduct(data: FormData) {

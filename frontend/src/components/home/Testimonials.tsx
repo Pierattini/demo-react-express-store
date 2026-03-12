@@ -3,7 +3,7 @@ import Heading from "../ui/Heading";
 import Card from "../ui/Card";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-const API_URL = import.meta.env.VITE_API_URL;
+import { httpGet } from "../../lib/http";
 type Review = {
   id: number;
   name: string;
@@ -19,12 +19,11 @@ export default function Testimonials() {
 
   useEffect(() => {
 
-    fetch(`${API_URL}/api/reviews`)
-      .then(res => res.json())
-      .then(data => setReviews(data))
-      .catch(err => console.error(err));
+  httpGet<Review[]>("/api/reviews", false)
+    .then(setReviews)
+    .catch(console.error);
 
-  }, []);
+}, []);
 
 
   return (

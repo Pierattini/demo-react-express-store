@@ -1,26 +1,15 @@
+import { httpGet, httpPut } from "./http";
 import type { SiteConfig } from "../types/SiteConfig";
-const API_URL = import.meta.env.VITE_API_URL;
+
 export async function updateSiteConfig(
-  data: SiteConfig,
-  token: string
+  data: SiteConfig
 ): Promise<SiteConfig> {
-
-  const res = await fetch(`${API_URL}/api/site`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify(data)
-  });
-
-  return res.json();
+  return httpPut<SiteConfig, SiteConfig>("/api/site", data, true);
 }
 
 export async function getSiteConfig(): Promise<SiteConfig> {
 
-  const res = await fetch(`${API_URL}/api/site`)
-  const data = await res.json();
+  const data = await httpGet<SiteConfig>("/api/site");
 
   return {
     id: data.id,
