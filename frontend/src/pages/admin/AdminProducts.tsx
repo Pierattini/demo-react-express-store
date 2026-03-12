@@ -4,7 +4,7 @@ import Card from "../../components/ui/Card";
 import Button from "../../components/ui/Button";
 import { getProducts, deleteProduct, updateProduct } from "../../lib/products";
 import type { Product } from "../../lib/types";
-const API = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL;
 type ProductWithFeatured = Product & {
   featured?: boolean;
 };
@@ -177,11 +177,15 @@ stock:v.stock
       }
     });
 
-    await fetch(`${API}/api/products`, {
+    const res = await fetch(`${API_URL}/api/products`, {
   method: "POST",
   body: formData,
   credentials: "include",
 });
+
+if (!res.ok) {
+  throw new Error("Error creando producto");
+}
 
     await reloadProducts();
 

@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
 import DashboardLayout from "../../components/layout/DashboardLayout";
 import Card from "../../components/ui/Card";
-import { httpGet, httpDelete, httpPut } from "../../lib/http";
-const API = import.meta.env.VITE_API_URL;
+import {
+  getUsers,
+  createUser,
+  updateUser,
+  changeUserRole,
+  deleteUser,
+  exportUsersExcel
+} from "../../lib/users";
+
 interface User {
   id: number;
   name: string;
@@ -35,7 +42,7 @@ export default function AdminUsers() {
 
   async function loadUsers() {
     try {
-      const data = await httpGet<User[]>("/users", true);
+      const data = await getUsers();
       setUsers(data);
     } catch (error) {
       console.error("Error cargando usuarios (" , error);
@@ -47,12 +54,12 @@ export default function AdminUsers() {
   async function handleDelete(id: number) {
     if (!confirm("¿Eliminar usuario?")) return;
 
-    await httpDelete(`/users/${id}`, true);
+    await deleteUser(id);
     loadUsers();
   }
 
   async function handleChangeRole(id: number, role: "user" | "admin") {
-    await httpPut(`/users/${id}/role`, { role }, true);
+    await changeUserRole(id, role);
     loadUsers();
   }
 
@@ -67,66 +74,51 @@ export default function AdminUsers() {
   async function handleUpdateUser() {
     if (!editingUser) return;
 
-    await httpPut(
-      `/users/${editingUser.id}`,
-      { name: editName, email: editEmail },
-      true
-    );
+    await updateUser(editingUser.id, {
+  name: editName,
+  email: editEmail
+});
 
     setEditingUser(null);
     loadUsers();
   }
 
   async function handleCreateUser() {
-    try {
-      await fetch(`${API}/auth/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newUser),
-      });
+  try {
+    await createUser(newUser);
 
-      setOpenModal(false);
+    setOpenModal(false);
 
-      setNewUser({
-        name: "",
-        email: "",
-        password: "",
-        role: "user",
-      });
+    setNewUser({
+      name: "",
+      email: "",
+      password: "",
+      role: "user",
+    });
 
-      loadUsers();
-    } catch (error) {
-      console.error("Error creando usuario", error);
-    }
+    loadUsers();
+  } catch (error) {
+    console.error("Error creando usuario", error);
   }
+}
 
   async function handleExportExcel() {
-    try {
-      const response = await fetch(
-  `${API}/users/export/excel`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+  try {
+    const blob = await exportUsersExcel();
 
-      if (!response.ok) throw new Error("Error descargando Excel");
+    const url = window.URL.createObjectURL(blob);
 
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "usuarios.xlsx";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
 
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "usuarios.xlsx";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    } catch (error) {
-      console.error("Error exportando usuarios:", error);
-    }
+  } catch (error) {
+    console.error("Error exportando usuarios:", error);
   }
+}
 
   return (
     <DashboardLayout title="Usuarios">

@@ -5,7 +5,7 @@ import type { SiteConfig } from "../../types/SiteConfig";
 import { CheckCircle2, Image as ImageIcon, Loader2, UploadCloud } from "lucide-react";
 import DashboardLayout from "../../components/layout/DashboardLayout"; 
 import AddressAutocomplete from "../../components/ui/AddressAutocomplete";
-const API = import.meta.env.VITE_API_URL;
+import { uploadImage } from "../../lib/upload";
 type UploadField = "hero_image" | "about_image" | "logo";
 /* ========= VALIDATIONS ========= */
 const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -276,7 +276,7 @@ export default function AdminSite() {
   e: React.ChangeEvent<HTMLInputElement>,
   field: UploadField
 ) => {
-  if (!e.target.files || !token) return;
+  if (!e.target.files) return;
 
   const file = e.target.files[0];
 
@@ -284,19 +284,9 @@ export default function AdminSite() {
   formData.append("image", file);
 
   try {
-    setUploadingField(field); // 🔥 activa loading
+    setUploadingField(field);
 
-    const res = await fetch(`${API}/api/upload`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: formData,
-    });
-
-    if (!res.ok) throw new Error("Error subiendo imagen");
-
-    const data = await res.json();
+    const data = await uploadImage(formData);
 
     setForm((prev) => ({
       ...prev,
@@ -306,7 +296,7 @@ export default function AdminSite() {
   } catch {
     alert("Error subiendo imagen");
   } finally {
-    setUploadingField(null); // 🔥 desactiva loading
+    setUploadingField(null);
   }
 };
 

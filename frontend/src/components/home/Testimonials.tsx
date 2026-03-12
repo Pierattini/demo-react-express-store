@@ -3,7 +3,7 @@ import Heading from "../ui/Heading";
 import Card from "../ui/Card";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-
+const API_URL = import.meta.env.VITE_API_URL;
 type Review = {
   id: number;
   name: string;
@@ -13,16 +13,19 @@ type Review = {
 export default function Testimonials() {
 
   const { t } = useTranslation();
-  const API = import.meta.env.VITE_API_URL;
+  
   const [reviews, setReviews] = useState<Review[]>([]);
   const [open, setOpen] = useState<number | null>(null);
 
   useEffect(() => {
-    fetch(`${API}/api/reviews`)
+
+    fetch(`${API_URL}/api/reviews`)
       .then(res => res.json())
       .then(data => setReviews(data))
       .catch(err => console.error(err));
+
   }, []);
+
 
   return (
     <section className="py-24">

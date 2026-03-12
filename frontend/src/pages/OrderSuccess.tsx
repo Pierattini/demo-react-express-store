@@ -6,18 +6,15 @@ import OrderStatusBadge from "../components/ui/OrderStatusBadge";
 import Card from "../components/ui/Card";
 import { useTranslation } from "react-i18next";
 
+const API_URL = import.meta.env.VITE_API_URL;
 export default function OrderSuccess() {
 
   const { t } = useTranslation();
-  const API = import.meta.env.VITE_API_URL;
   const location = useLocation();
   const [searchParams] = useSearchParams();
-
   const orderIdFromState =
     (location.state as { orderId?: number })?.orderId;
-
   const sessionId = searchParams.get("session_id");
-
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -36,10 +33,7 @@ export default function OrderSuccess() {
 
         if (sessionId) {
 
-          const res = await fetch(
-  `${API}/api/payments/stripe/order-status?session_id=${sessionId}`
-);
-
+          const res = await fetch(`${API_URL}/api/payments/stripe/order-status?session_id=${sessionId}`)
           const { orderId } = await res.json();
 
           if (!orderId) {
@@ -86,8 +80,7 @@ export default function OrderSuccess() {
 
     loadOrder();
 
-  }, [orderIdFromState, sessionId]);
-
+  }, [orderIdFromState, sessionId, t]);
   if (!orderIdFromState && !sessionId) {
     return <Navigate to="/" replace />;
   }

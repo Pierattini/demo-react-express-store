@@ -1,11 +1,11 @@
 import type { SiteConfig } from "../types/SiteConfig";
-
+const API_URL = import.meta.env.VITE_API_URL;
 export async function updateSiteConfig(
   data: SiteConfig,
   token: string
 ): Promise<SiteConfig> {
 
-  const res = await fetch("https://demo-store-api-o311.onrender.com/api/site", {
+  const res = await fetch(`${API_URL}/api/site`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -19,7 +19,7 @@ export async function updateSiteConfig(
 
 export async function getSiteConfig(): Promise<SiteConfig> {
 
-  const res = await fetch("https://demo-store-api-o311.onrender.com/api/site");
+  const res = await fetch(`${API_URL}/api/site`)
   const data = await res.json();
 
   return {

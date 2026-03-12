@@ -24,7 +24,7 @@ const [editShipping, setEditShipping] = useState<{
   notes?: string;
 } | null>(null);
   //const navigate = useNavigate();
-  const API = import.meta.env.VITE_API_URL;
+  const API_URL = import.meta.env.VITE_API_URL;
   const loadOrders = async () => {
     try {
       setLoading(true);
@@ -56,13 +56,17 @@ const [editShipping, setEditShipping] = useState<{
   try {
     const token = localStorage.getItem("token");
 
-    await fetch(`${API}/orders/${id}/cancel`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await fetch(`${API_URL}/orders/${id}/cancel`, {
+  method: "PUT",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  },
+});
+
+if (!res.ok) {
+  throw new Error("Error cancelando orden");
+}
 
     loadOrders();
   } catch {
