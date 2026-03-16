@@ -168,28 +168,37 @@ export default function Navbar() {
             </div>
 
             {isLoggedIn ? (
+  <>
+    {/* Desktop */}
+    <div className="hidden md:flex items-center gap-4">
 
-              <div className="hidden md:flex items-center gap-4">
+      {user?.role === "admin" && (
+        <Link
+          to="/admin"
+          className="font-medium text-black hover:opacity-70 transition"
+        >
+          Admin
+        </Link>
+      )}
 
-                {user?.role === "admin" && (
-                  <Link
-                    to="/admin"
-                    className="font-medium text-black hover:opacity-70 transition"
-                  >
-                    Admin
-                  </Link>
-                )}
+      <button
+        onClick={handleLogout}
+        className="font-medium hover:opacity-70 transition"
+      >
+        {t("logout")}
+      </button>
 
-                <button
-                  onClick={handleLogout}
-                  className="font-medium hover:opacity-70 transition"
-                >
-                  {t("logout")}
-                </button>
+    </div>
 
-              </div>
-
-            ) : (
+    {/* Mobile */}
+    <button
+      onClick={handleLogout}
+      className="md:hidden w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition"
+    >
+      🚪
+    </button>
+  </>
+) : (
 
               <button
                 onClick={() => setLoginOpen(true)}
