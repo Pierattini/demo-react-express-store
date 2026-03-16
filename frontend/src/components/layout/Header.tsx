@@ -170,8 +170,8 @@ export default function Header() {
     />
 
     <div className="relative bg-white rounded-xl shadow-xl w-full max-w-xl p-8">
-      <RegisterForm />
-    </div>
+  <RegisterForm onClose={() => setRegisterOpen(false)} />
+</div>
 
   </div>
 )}

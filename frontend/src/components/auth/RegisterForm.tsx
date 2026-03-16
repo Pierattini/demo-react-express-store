@@ -9,7 +9,11 @@ type FormState = {
   confirmPassword: string;
 };
 
-export default function RegisterForm() {
+type Props = {
+  onClose?: () => void;
+};
+
+export default function RegisterForm({ onClose }: Props) {
   const navigate = useNavigate();
 
   const [form, setForm] = useState<FormState>({
@@ -71,10 +75,12 @@ export default function RegisterForm() {
       await register(form.name.trim(), form.email.trim(), form.password);
 
       // ✅ descuento
-      localStorage.setItem("WELCOME10", "true");
+      localStorage.setItem("Descuento 10%", "true");
 
       alert("Usuario creado correctamente 🎉");
-      navigate("/");
+
+onClose?.();   // ← esto cierra el modal
+navigate("/");
 
       setForm({ name: "", email: "", password: "", confirmPassword: "" });
     } catch (err: unknown) {
