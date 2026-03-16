@@ -213,22 +213,21 @@ export default function Navbar() {
     <div
       className="
       absolute top-[72px] left-6 w-[220px]
-      bg-white/90 backdrop-blur-md
-      shadow-xl shadow-black/10
-      border border-gray-200
-      rounded-xl
-      z-40
-      p-3
-      flex flex-col
-      gap-1
-      min-w-[180px]
-      animate-menu
+bg-white/90 backdrop-blur-md
+shadow-xl shadow-black/10
+border border-gray-200
+rounded-xl
+z-40
+p-3
+flex flex-col
+gap-1
+animate-menu
       "
     >
       <Link
         to="/"
         onClick={() => setMenuOpen(false)}
-        className="px-3 py-2 rounded-lg hover:bg-[#7c9a7c]/10 hover:text-[#7c9a7c] hover:translate-x-1 transition"
+        className="px-4 py-2 rounded-lg whitespace-nowrap hover:bg-[#7c9a7c]/10 hover:text-[#7c9a7c] hover:translate-x-1 transition"
       >
         {t("home")}
       </Link>
@@ -236,7 +235,7 @@ export default function Navbar() {
       <Link
         to="/catalog"
         onClick={() => setMenuOpen(false)}
-        className="px-3 py-2 rounded-lg hover:bg-[#7c9a7c]/10 hover:text-[#7c9a7c] hover:translate-x-1 transition"
+        className="px-4 py-2 rounded-lg whitespace-nowrap hover:bg-[#7c9a7c]/10 hover:text-[#7c9a7c] hover:translate-x-1 transition"
       >
         {t("catalog")}
       </Link>
@@ -244,7 +243,7 @@ export default function Navbar() {
       <Link
         to="/contact"
         onClick={() => setMenuOpen(false)}
-        className="px-3 py-2 rounded-lg hover:bg-[#7c9a7c]/10 hover:text-[#7c9a7c] hover:translate-x-1 transition"
+        className="px-4 py-2 rounded-lg whitespace-nowrap hover:bg-[#7c9a7c]/10 hover:text-[#7c9a7c] hover:translate-x-1 transition"
       >
         {t("contact")}
       </Link>
