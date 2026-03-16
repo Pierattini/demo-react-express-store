@@ -108,7 +108,7 @@ export default function Navbar() {
           </div>
 
           {/* LOGO */}
-          <div className="absolute left-1/2 -translate-x-1/2 flex items-center">
+          <div className="flex justify-center">
   {site?.logo ? (
     <img
       src={site.logo}
