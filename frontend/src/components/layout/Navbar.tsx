@@ -76,7 +76,7 @@ export default function Navbar() {
         `}
       >
 
-        <div className="relative w-full max-w-7xl mx-auto px-4 md:px-12 grid grid-cols-3 items-center">
+        <div className="relative w-full max-w-7xl mx-auto px-4 md:px-12 grid grid-cols-[auto_1fr_auto] items-center">
 
           {/* IZQUIERDA */}
           <div className="flex items-center gap-3 md:gap-6 justify-start">
@@ -129,7 +129,7 @@ export default function Navbar() {
 </div>
 
           {/* DERECHA */}
-          <div className="flex items-center gap-3 md:gap-6">
+          <div className="flex items-center gap-2 md:gap-6 justify-end">
 
             {/* CARRITO */}
             <button
