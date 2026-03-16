@@ -72,11 +72,11 @@ export default function Navbar() {
           fixed top-0 w-full z-50
           transition-all duration-300
           ${scrolled ? "bg-white shadow-md" : "bg-white"}
-          h-[90px]
+          h-[72px]
         `}
       >
 
-        <div className="relative w-full px-6 md:px-8 lg:px-4 grid grid-cols-[1fr_auto_1fr] items-center h-full">
+        <div className="relative w-full h-full px-6 md:px-8 lg:px-4 grid grid-cols-[1fr_auto_1fr] items-center">
 
           {/* IZQUIERDA */}
           <div className="relative flex items-center gap-3 md:gap-6 justify-start">
@@ -212,7 +212,7 @@ export default function Navbar() {
     {/* menu */}
     <div
       className="
-      absolute top-[92px] left-6 w-[220px]
+      absolute top-[72px] left-6 w-[220px]
 bg-white/90 backdrop-blur-md
 shadow-xl shadow-black/10
 border border-gray-200
