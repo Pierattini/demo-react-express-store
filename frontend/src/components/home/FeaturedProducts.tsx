@@ -16,7 +16,7 @@ export default function FeaturedProducts() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const { t } = useTranslation();
-  const visibleCount = 6;
+  const visibleCount = 3;
 
   if (loading) {
     return (
