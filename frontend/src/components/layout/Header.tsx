@@ -169,7 +169,7 @@ export default function Header() {
       onClick={() => setRegisterOpen(false)}
     />
 
-    <div className="relative bg-white rounded-xl shadow-xl w-[420px] p-6">
+    <div className="relative bg-white rounded-xl shadow-xl w-[520px] p-6">
       <RegisterForm />
     </div>
 
