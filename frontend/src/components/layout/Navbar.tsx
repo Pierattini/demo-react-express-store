@@ -169,6 +169,7 @@ export default function Navbar() {
 
            {isLoggedIn ? (
   <div className="hidden md:flex items-center gap-4">
+
     {user?.role === "admin" && (
       <Link
         to="/admin"
@@ -182,8 +183,9 @@ export default function Navbar() {
       onClick={handleLogout}
       className="font-medium hover:opacity-70 transition"
     >
-      {t("logout")}
+      Cerrar sesión
     </button>
+
   </div>
 ) : (
   <button
