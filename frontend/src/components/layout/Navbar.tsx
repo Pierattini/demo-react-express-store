@@ -168,7 +168,7 @@ export default function Navbar() {
             </div>
 
            {isLoggedIn ? (
-  <div className="hidden md:flex items-center gap-4">
+  <div className="flex items-center gap-4">
 
     {user?.role === "admin" && (
       <Link
@@ -195,16 +195,6 @@ export default function Navbar() {
     👤
   </button>
 )}
-
-              <button
-                onClick={() => setLoginOpen(true)}
-                className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition"
-              >
-                👤
-              </button>
-
-          
-
           </div>
 
         </div>
