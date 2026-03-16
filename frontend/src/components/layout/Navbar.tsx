@@ -200,8 +200,6 @@ export default function Navbar() {
         </div>
 
       </nav>
-
-      {/* MENU */}
       {/* MENU */}
 {menuOpen && (
   <>
