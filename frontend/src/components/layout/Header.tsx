@@ -4,6 +4,7 @@ import { useSiteConfig } from "../../hooks/useSiteConfig";
 import { useState } from "react";
 import CartDrawer from "../cart/CartDrawer";
 import Login from "../../pages/Login";
+import RegisterForm from "../auth/RegisterForm";
 
 export default function Header() {
 
@@ -13,7 +14,7 @@ export default function Header() {
 
   const [cartOpen, setCartOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
-
+  const [registerOpen, setRegisterOpen] = useState(false);
   const token = localStorage.getItem("token");
   const userRaw = localStorage.getItem("user");
   const user = userRaw ? JSON.parse(userRaw) : null;
@@ -100,7 +101,16 @@ export default function Header() {
                 Login
               </button>
 
-              <Link to="/register">Registro</Link>
+              <button
+  onClick={() => setRegisterOpen(true)}
+  style={{
+    border: "none",
+    background: "transparent",
+    cursor: "pointer"
+  }}
+>
+  Registro
+</button>
             </>
           ) : (
             <>
@@ -150,7 +160,21 @@ export default function Header() {
 
         </div>
       )}
+{/* REGISTER MODAL */}
+{registerOpen && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center">
 
+    <div
+      className="absolute inset-0 bg-black/40"
+      onClick={() => setRegisterOpen(false)}
+    />
+
+    <div className="relative bg-white rounded-xl shadow-xl w-[420px] p-6">
+      <RegisterForm />
+    </div>
+
+  </div>
+)}
     </>
   );
 }
