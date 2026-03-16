@@ -76,7 +76,7 @@ export default function Navbar() {
         `}
       >
 
-        <div className="relative w-full px-6 md:px-12 flex items-center justify-between">
+        <div className="relative w-full max-w-7xl mx-auto px-4 md:px-12 flex items-center justify-between">
 
           {/* IZQUIERDA */}
           <div className="flex items-center gap-3 md:gap-6">
