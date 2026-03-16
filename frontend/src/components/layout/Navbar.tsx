@@ -212,7 +212,7 @@ export default function Navbar() {
     {/* menu */}
     <div
       className="
-      absolute top-[72px] left-6
+      absolute top-[72px] left-6 w-[220px]
       bg-white/90 backdrop-blur-md
       shadow-xl shadow-black/10
       border border-gray-200
