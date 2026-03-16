@@ -76,10 +76,10 @@ export default function Navbar() {
         `}
       >
 
-        <div className="relative w-full max-w-7xl mx-auto px-4 md:px-12 flex items-center justify-between">
+        <div className="relative w-full max-w-7xl mx-auto px-4 md:px-12 grid grid-cols-3 items-center">
 
           {/* IZQUIERDA */}
-          <div className="flex items-center gap-3 md:gap-6">
+          <div className="flex items-center gap-3 md:gap-6 justify-start">
 
             <button
               onClick={() => setMenuOpen(!menuOpen)}
@@ -108,26 +108,25 @@ export default function Navbar() {
           </div>
 
           {/* LOGO */}
-          <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-none">
-            {site?.logo ? (
-              <img
-                src={site.logo}
-                alt={
-                  i18n.language === "en"
-                    ? site?.brand_name_en || site?.brand_name
-                    : site?.brand_name
-                }
-                className="h-8 md:h-20 max-w-[140px] object-contain"
-              />
-            ) : (
-              <span className="font-semibold text-xl tracking-wide">
-                {i18n.language === "en"
-                  ? site?.brand_name_en || site?.brand_name
-                  : site?.brand_name || "Meubles"}
-              </span>
-            )}
-
-          </div>
+          <div className="flex justify-center">
+  {site?.logo ? (
+    <img
+      src={site.logo}
+      alt={
+        i18n.language === "en"
+          ? site?.brand_name_en || site?.brand_name
+          : site?.brand_name
+      }
+      className="h-8 md:h-20 max-w-[140px] object-contain"
+    />
+  ) : (
+    <span className="font-semibold text-xl tracking-wide">
+      {i18n.language === "en"
+        ? site?.brand_name_en || site?.brand_name
+        : site?.brand_name || "Meubles"}
+    </span>
+  )}
+</div>
 
           {/* DERECHA */}
           <div className="flex items-center gap-3 md:gap-6">
