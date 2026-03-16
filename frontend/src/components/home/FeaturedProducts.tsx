@@ -20,7 +20,7 @@ export default function FeaturedProducts() {
 
   if (loading) {
     return (
-      <section className="py-20">
+      <section className="pt-24 pb-16">
         <Container>
           <div className="text-center text-sm text-gray-500">
             {t("loadingProducts")}
@@ -102,7 +102,7 @@ export default function FeaturedProducts() {
             </button>
           )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
 
             {visibleProducts.map((product) => (
 
