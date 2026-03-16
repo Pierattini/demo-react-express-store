@@ -76,7 +76,7 @@ export default function Navbar() {
         `}
       >
 
-        <div className="relative w-full h-full px-6 md:px-8 lg:px-4 grid grid-cols-[1fr_auto_1fr] items-center">
+        <div className="relative w-full px-6 md:px-8 lg:px-4 py-3 grid grid-cols-[1fr_auto_1fr] items-center">
 
           {/* IZQUIERDA */}
           <div className="relative flex items-center gap-3 md:gap-6 justify-start">
