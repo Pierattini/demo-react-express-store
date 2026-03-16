@@ -169,7 +169,7 @@ export default function Navbar() {
 
             {isLoggedIn ? (
 
-              <div className="flex items-center gap-4">
+              <div className="hidden md:flex items-center gap-4">
 
                 {user?.role === "admin" && (
                   <Link
@@ -212,14 +212,14 @@ export default function Navbar() {
   <>
     {/* overlay para cerrar */}
     <div
-      className="fixed inset-0 z-30"
+      className="fixed inset-0 z-40"
       onClick={() => setMenuOpen(false)}
     />
 
     {/* menu */}
     <div
       className="
-      fixed top-[70px] left-4
+      absolute top-full left-4 mt-2
       bg-white/90 backdrop-blur-md
       shadow-xl shadow-black/10
       border border-gray-200
