@@ -79,7 +79,7 @@ export default function Navbar() {
         <div className="relative w-full px-6 md:px-8 lg:px-4 grid grid-cols-[1fr_auto_1fr] items-center">
 
           {/* IZQUIERDA */}
-          <div className="flex items-center gap-3 md:gap-6 justify-start">
+          <div className="relative flex items-center gap-3 md:gap-6 justify-start">
 
             <button
               onClick={() => setMenuOpen(!menuOpen)}
@@ -212,7 +212,7 @@ export default function Navbar() {
     {/* menu */}
     <div
       className="
-      fixed top-[80px] left-6
+      absolute top-[48px] left-0
       bg-white/90 backdrop-blur-md
       shadow-xl shadow-black/10
       border border-gray-200
