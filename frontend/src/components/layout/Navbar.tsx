@@ -76,7 +76,7 @@ export default function Navbar() {
         `}
       >
 
-        <div className="relative w-full px-6 md:px-16 grid grid-cols-[1fr_auto_1fr] items-center">
+        <div className="relative w-full px-6 md:px-8 lg:px-4 grid grid-cols-[1fr_auto_1fr] items-center">
 
           {/* IZQUIERDA */}
           <div className="flex items-center gap-3 md:gap-6 justify-start">
@@ -117,7 +117,7 @@ export default function Navbar() {
           ? site?.brand_name_en || site?.brand_name
           : site?.brand_name
       }
-      className="h-8 md:h-24 object-contain"
+      className="h-10 md:h-28 object-contain"
     />
   ) : (
     <span className="font-semibold text-xl tracking-wide">
