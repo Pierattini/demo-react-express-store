@@ -152,6 +152,12 @@ export default function Header() {
           />
 
           <div className="relative bg-white rounded-xl shadow-xl w-[420px] p-6">
+            <button
+    onClick={() => setLoginOpen(false)}
+    className="absolute top-3 right-3 text-gray-400 hover:text-black text-xl"
+  >
+    ✕
+  </button>
             <Login
               isModal
               onClose={() => setLoginOpen(false)}
