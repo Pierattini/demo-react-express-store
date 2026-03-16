@@ -181,10 +181,9 @@ export default function Navbar() {
 
     <button
   onClick={handleLogout}
-  className="font-medium hover:opacity-70 transition flex items-center gap-1"
+  className="font-medium hover:opacity-70 transition whitespace-nowrap"
 >
-  <span className="hidden md:inline">Cerrar sesión</span>
-  <span className="md:hidden">⎋</span>
+  Cerrar sesión
 </button>
 
   </div>
