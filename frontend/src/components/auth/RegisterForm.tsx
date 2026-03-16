@@ -86,7 +86,7 @@ export default function RegisterForm() {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl p-10 w-full max-w-lg">
+    <div className="bg-white rounded-2xl shadow-xl p-10 w-full max-w-xl">
       {error && (
         <div className="mb-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
           {error}
