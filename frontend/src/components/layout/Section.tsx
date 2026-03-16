@@ -16,7 +16,7 @@ const sizeMap: Record<SectionSize, string> = {
   sm: "max-w-md",
   md: "max-w-2xl",
   lg: "max-w-3xl",
-  xl: "max-w-5xl",
+  xl: "max-w-7xl",
   full: "max-w-none",
 };
 
@@ -29,7 +29,7 @@ const spacingMap: Record<SectionSpacing, string> = {
 
 export default function Section({
   children,
-  size = "md",
+  size = "xl",
   spacing = "md",
   className,
 }: SectionProps) {
