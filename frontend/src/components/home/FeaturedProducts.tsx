@@ -16,7 +16,7 @@ export default function FeaturedProducts() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const { t } = useTranslation();
-  const visibleCount = 3;
+  const visibleCount = 6;
 
   if (loading) {
     return (
@@ -102,7 +102,7 @@ export default function FeaturedProducts() {
             </button>
           )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-[1100px] mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
             {visibleProducts.map((product) => (
 
               <Card
@@ -111,7 +111,7 @@ export default function FeaturedProducts() {
                 className="p-5 space-y-4 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group cursor-pointer"
               >
 
-                <div className="h-48 rounded-2xl overflow-hidden bg-gray-100">
+                <div className="h-72 rounded-2xl overflow-hidden bg-gray-100">
 
                   {product.image ? (
 
