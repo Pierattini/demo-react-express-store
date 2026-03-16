@@ -207,47 +207,57 @@ export default function Navbar() {
       </nav>
 
       {/* MENU */}
-      {menuOpen && (
-        <div className="
-absolute top-[110px] left-6
-bg-white/90 backdrop-blur-md
-shadow-xl shadow-black/10
-border border-gray-200
-rounded-xl
-z-40
-p-3
-flex flex-col
-gap-1
-min-w-[180px]
-animate-menu
-">
+      {/* MENU */}
+{menuOpen && (
+  <>
+    {/* overlay para cerrar */}
+    <div
+      className="fixed inset-0 z-30"
+      onClick={() => setMenuOpen(false)}
+    />
 
-          <Link
-            to="/"
-            onClick={() => setMenuOpen(false)}
-            className="px-3 py-2 rounded-lg hover:bg-[#7c9a7c]/10 hover:text-[#7c9a7c] hover:translate-x-1 transition"
-          >
-            {t("home")}
-          </Link>
+    {/* menu */}
+    <div
+      className="
+      fixed top-[70px] left-4
+      bg-white/90 backdrop-blur-md
+      shadow-xl shadow-black/10
+      border border-gray-200
+      rounded-xl
+      z-40
+      p-3
+      flex flex-col
+      gap-1
+      min-w-[180px]
+      animate-menu
+      "
+    >
+      <Link
+        to="/"
+        onClick={() => setMenuOpen(false)}
+        className="px-3 py-2 rounded-lg hover:bg-[#7c9a7c]/10 hover:text-[#7c9a7c] hover:translate-x-1 transition"
+      >
+        {t("home")}
+      </Link>
 
-          <Link
-            to="/catalog"
-            onClick={() => setMenuOpen(false)}
-            className="px-3 py-2 rounded-lg hover:bg-[#7c9a7c]/10 hover:text-[#7c9a7c] hover:translate-x-1 transition"
-          >
-            {t("catalog")}
-          </Link>
+      <Link
+        to="/catalog"
+        onClick={() => setMenuOpen(false)}
+        className="px-3 py-2 rounded-lg hover:bg-[#7c9a7c]/10 hover:text-[#7c9a7c] hover:translate-x-1 transition"
+      >
+        {t("catalog")}
+      </Link>
 
-          <Link
-            to="/contact"
-            onClick={() => setMenuOpen(false)}
-            className="px-3 py-2 rounded-lg hover:bg-[#7c9a7c]/10 hover:text-[#7c9a7c] hover:translate-x-1 transition"
-          >
-            {t("contact")}
-          </Link>
-
-        </div>
-      )}
+      <Link
+        to="/contact"
+        onClick={() => setMenuOpen(false)}
+        className="px-3 py-2 rounded-lg hover:bg-[#7c9a7c]/10 hover:text-[#7c9a7c] hover:translate-x-1 transition"
+      >
+        {t("contact")}
+      </Link>
+    </div>
+  </>
+)}
 
       <CartDrawer
         open={cartOpen}
