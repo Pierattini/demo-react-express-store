@@ -117,7 +117,7 @@ export default function Navbar() {
           ? site?.brand_name_en || site?.brand_name
           : site?.brand_name
       }
-      className="h-14 md:h-20 object-contain"
+      className="h-12 md:h-14 object-contain"
     />
   ) : (
     <span className="font-semibold text-xl tracking-wide">
