@@ -79,11 +79,20 @@ export default function Login({ isModal, onClose }: Props) {
 
   return (
 
-    <Section
-      size="sm"
-      spacing="md"
-      className={isModal ? "p-0" : ""}
-    >
+  <Section
+    size="sm"
+    spacing="md"
+    className={`relative ${isModal ? "p-0" : ""}`}
+  >
+
+    {isModal && onClose && (
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 text-gray-400 hover:text-black text-xl"
+      >
+        ✕
+      </button>
+    )}
 
       <Heading level={2}>
         {t("login")}
