@@ -117,7 +117,7 @@ export default function Navbar() {
           ? site?.brand_name_en || site?.brand_name
           : site?.brand_name
       }
-      className="h-10 md:h-28 object-contain"
+      className="h-12 md:h-20 object-contain"
     />
   ) : (
     <span className="font-semibold text-xl tracking-wide">
@@ -212,7 +212,7 @@ export default function Navbar() {
     {/* menu */}
     <div
       className="
-      absolute top-[48px] left-0
+      absolute top-[80px] left-6
       bg-white/90 backdrop-blur-md
       shadow-xl shadow-black/10
       border border-gray-200
