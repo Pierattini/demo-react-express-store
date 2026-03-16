@@ -24,7 +24,7 @@ console.log("Idioma actual:", i18n.language)
       <div className="absolute inset-0 bg-black/60"></div>
 
       {/* contenido */}
-      <div className="relative z-10 flex h-full items-start pt-32 px-6 md:px-12 text-white">
+      <div className="relative z-10 flex h-full items-center px-6 md:px-12 text-white">
         <div className="max-w-xl">
 
           {/* TÍTULO */}
