@@ -39,15 +39,9 @@ export default function Header() {
     alignItems: "center",
     padding: "12px 20px",
     borderBottom: "1px solid #e5e5e5",
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    background: "#fff",
-    zIndex: 1000
+    position: "relative"
   }}
 >
-
         {/* Logo */}
         <Link 
   to="/" 
