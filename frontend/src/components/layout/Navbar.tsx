@@ -72,7 +72,7 @@ export default function Navbar() {
           fixed top-0 w-full z-50
           transition-all duration-300
           ${scrolled ? "bg-white shadow-md" : "bg-white"}
-          py-4 md:py-6
+          py-3 md:py-5
         `}
       >
 
@@ -108,8 +108,7 @@ export default function Navbar() {
           </div>
 
           {/* LOGO */}
-          <div className="absolute md:left-1/2 md:-translate-x-1/2 flex items-center justify-center">
-
+          <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-none">
             {site?.logo ? (
               <img
                 src={site.logo}
