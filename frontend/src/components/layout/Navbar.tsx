@@ -72,7 +72,7 @@ export default function Navbar() {
           fixed top-0 w-full z-50
           transition-all duration-300
           ${scrolled ? "bg-white shadow-md" : "bg-white"}
-          h-[96px]
+          h-[72px]
         `}
       >
 
