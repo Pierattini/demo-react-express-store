@@ -183,7 +183,7 @@ export default function Navbar() {
   onClick={handleLogout}
   className="font-medium hover:opacity-70 transition whitespace-nowrap"
 >
-  Cerrar sesión
+  Cerrar
 </button>
 
   </div>
