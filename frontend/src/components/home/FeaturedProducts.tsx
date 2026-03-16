@@ -91,7 +91,7 @@ export default function FeaturedProducts() {
         </div>
 
         {/* Carousel */}
-        <div className="relative flex items-center px-12">
+        <div className="relative flex items-center">
 
           {startIndex > 0 && (
             <button
