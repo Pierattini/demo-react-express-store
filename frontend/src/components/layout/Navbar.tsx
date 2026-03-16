@@ -72,7 +72,7 @@ export default function Navbar() {
           fixed top-0 w-full z-50
           transition-all duration-300
           ${scrolled ? "bg-white shadow-md" : "bg-white"}
-          h-[72px]
+          h-[90px]
         `}
       >
 
@@ -212,7 +212,7 @@ export default function Navbar() {
     {/* menu */}
     <div
       className="
-      absolute top-[72px] left-6 w-[220px]
+      absolute top-[92px] left-6 w-[220px]
 bg-white/90 backdrop-blur-md
 shadow-xl shadow-black/10
 border border-gray-200
