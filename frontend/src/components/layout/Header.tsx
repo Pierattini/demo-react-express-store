@@ -33,14 +33,20 @@ export default function Header() {
   return (
     <>
       <header
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "12px 20px",
-          borderBottom: "1px solid #e5e5e5",
-        }}
-      >
+  style={{
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "12px 20px",
+    borderBottom: "1px solid #e5e5e5",
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    background: "#fff",
+    zIndex: 1000
+  }}
+>
 
         {/* Logo */}
         <Link 
