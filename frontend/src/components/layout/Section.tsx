@@ -16,7 +16,7 @@ const sizeMap: Record<SectionSize, string> = {
   sm: "max-w-md",
   md: "max-w-2xl",
   lg: "max-w-3xl",
-  xl: "max-w-7xl",
+  xl: "max-w-[1500px]",
   full: "max-w-none",
 };
 
