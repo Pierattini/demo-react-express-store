@@ -16,7 +16,7 @@ export default function Banner() {
   console.log("Idioma actual:", i18n.language);
 
   return (
-    <section className="relative h-[70vh] w-full overflow-hidden">
+    <section className="relative min-h-[70vh] w-full overflow-hidden">
 
       {/* Imagen */}
       <img
@@ -29,7 +29,7 @@ export default function Banner() {
       <div className="absolute inset-0 bg-black/60"></div>
 
       {/* contenido */}
-      <div className="relative z-10 flex h-full items-start pt-64 px-6 md:px-12 text-white">
+      <div className="relative z-10 flex min-h-[70vh] items-start pt-64 px-6 md:px-12 text-white">
         <div className="max-w-xl">
 
           {/* TÍTULO */}
