@@ -103,13 +103,13 @@ export default function FeaturedProducts() {
           )}
 
           <div className="
-  grid
-  grid-cols-1
-  sm:grid-cols-2
-  md:grid-cols-3
+  flex
+  flex-col
+  md:flex-row
   gap-6
-  max-w-[1100px]
-  mx-auto
+  w-full
+  px-4
+  justify-center
 ">
             {visibleProducts.map((product) => (
 
