@@ -134,7 +134,10 @@ export default function Navbar() {
             {/* CARRITO */}
             <button
               onClick={() => setCartOpen(true)}
-              className="relative text-xl hover:opacity-70 transition ml-1 sm:ml-2"
+              className={`
+  relative text-xl hover:opacity-70 transition
+  ${isLoggedIn ? "ml-1" : "ml-2"}
+`}
             >
               🛒
 
