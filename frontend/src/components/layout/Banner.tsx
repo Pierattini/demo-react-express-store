@@ -52,31 +52,24 @@ export default function Banner() {
           </p>
 
           {/* BOTONES */}
-          <div className="
-            flex flex-col
-            sm:flex-row
-            gap-4
-            w-full
-          ">
+          <div className="flex flex-col sm:flex-row gap-4 items-start">
 
-            <Link to="/catalog" className="w-full sm:w-auto">
-              <Button className="w-full sm:w-auto rounded-full px-8 py-3">
-                {t("catalog")}
-              </Button>
-            </Link>
+  <Link to="/catalog">
+    <Button className="rounded-full px-6 py-2.5 text-sm font-medium">
+      {t("catalog")}
+    </Button>
+  </Link>
 
-            <Button
-              onClick={() => setOpenRegister(true)}
-              
-              className="
-                w-full sm:w-auto
-                rounded-full px-8 py-3
-                bg-white/20 border border-white/30 text-white
-                hover:bg-white hover:text-black
-              "
-            >
-              {t("createAccount")}
-            </Button>
+  <Button
+    onClick={() => setOpenRegister(true)}
+    className="
+      rounded-full px-6 py-2.5 text-sm font-medium
+      bg-white/20 border border-white/30 text-white
+      hover:bg-white hover:text-black
+    "
+  >
+    {t("createAccount")}
+  </Button>
 
           </div>
 
