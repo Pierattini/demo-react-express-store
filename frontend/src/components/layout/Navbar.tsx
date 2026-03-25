@@ -129,7 +129,7 @@ export default function Navbar() {
 </div>
 
           {/* DERECHA */}
-          <div className="flex items-center gap-2 md:gap-6 justify-end">
+          <div className="flex items-center gap-3 md:gap-6 justify-end pr-2">
 
             {/* IDIOMA */}
             <div className="hidden md:flex gap-2 text-sm font-medium items-center">
