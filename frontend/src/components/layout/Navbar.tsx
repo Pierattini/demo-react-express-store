@@ -31,16 +31,12 @@ export default function Navbar() {
   );
 
   useEffect(() => {
-  const loadSite = async () => {
-    try {
+    const loadSite = async () => {
       const config = await getSiteConfig();
       setSite(config);
-    } catch (error) {
-      console.log("ERROR SITE CONFIG:", error);
-    }
-  };
-  loadSite();
-}, []);
+    };
+    loadSite();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -80,7 +76,7 @@ export default function Navbar() {
         `}
       >
 
-        <div className="relative w-full h-full px-1 md:px-6 flex justify-between items-center">
+        <div className="relative w-full h-full px-1 md:px-6 grid grid-cols-[1fr_auto_1fr] items-center">
 
           {/* IZQUIERDA */}
           <div className="relative flex items-center gap-3 md:gap-6 justify-start">
@@ -133,103 +129,138 @@ export default function Navbar() {
 </div>
 
           {/* DERECHA */}
-<div className="flex items-center gap-3 md:gap-6 justify-end pr-2">
+          <div className="flex items-center gap-2 md:gap-6 justify-end">
 
-  {/* IDIOMA */}
-  <div className="hidden md:flex gap-2 text-sm font-medium items-center">
-    <button
-      onClick={() => i18n.changeLanguage("es")}
-      className={i18n.language === "es" ? "font-bold underline" : ""}
-    >
-      ES
-    </button>
+            {/* IDIOMA */}
+            <div className="hidden md:flex gap-2 text-sm font-medium items-center">
 
-    <span>|</span>
+              <button
+                onClick={() => i18n.changeLanguage("es")}
+                className={`${i18n.language === "es" ? "font-bold underline" : ""}`}
+              >
+                ES
+              </button>
 
-    <button
-      onClick={() => i18n.changeLanguage("en")}
-      className={i18n.language === "en" ? "font-bold underline" : ""}
-    >
-      EN
-    </button>
-  </div>
+              <span>|</span>
 
-  {/* LOGIN / ADMIN */}
-  {isLoggedIn ? (
-    <div className="flex items-center gap-3 sm:gap-4">
+              <button
+                onClick={() => i18n.changeLanguage("en")}
+                className={`${i18n.language === "en" ? "font-bold underline" : ""}`}
+              >
+                EN
+              </button>
 
-      {user?.role === "admin" && (
-        <Link
-          to="/admin"
-          className="font-medium text-black hover:opacity-70 transition"
-        >
-          Admin
-        </Link>
-      )}
+            </div>
 
-      <button
-        onClick={handleLogout}
-        className="font-medium hover:opacity-70 transition whitespace-nowrap"
+           {isLoggedIn ? (
+  <div className="flex items-center gap-3 sm:gap-4">
+
+    {user?.role === "admin" && (
+      <Link
+        to="/admin"
+        className="font-medium text-black hover:opacity-70 transition"
       >
-        Cerrar
-      </button>
+        Admin
+      </Link>
+    )}
 
-    </div>
-  ) : (
+    <button
+      onClick={handleLogout}
+      className="font-medium hover:opacity-70 transition whitespace-nowrap"
+    >
+      Cerrar
+    </button>
+
+    {/* 🛒 MOVIDO AQUÍ */}
+    <button
+      onClick={() => setCartOpen(true)}
+      className="relative text-xl hover:opacity-70 transition ml-2 mr-1"
+    >
+      🛒
+
+      {totalItems > 0 && (
+        <span className="absolute -top-2 -right-3 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-black px-1 text-[11px] font-semibold text-white">
+          {totalItems}
+        </span>
+      )}
+    </button>
+
+  </div>
+) : (
+  <div className="flex items-center gap-2">
+
+    <button
+      onClick={() => setCartOpen(true)}
+      className="relative text-xl hover:opacity-70 transition"
+    >
+      🛒
+    </button>
+
     <button
       onClick={() => setLoginOpen(true)}
       className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition"
     >
       👤
     </button>
-  )}
 
-  {/* 🛒 CARRITO */}
-  <button
-    onClick={() => setCartOpen(true)}
-    className="relative text-xl hover:opacity-70 transition ml-2"
-  >
-    🛒
-
-    {totalItems > 0 && (
-      <span className="absolute -top-2 -right-3 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-black px-1 text-[11px] font-semibold text-white">
-        {totalItems}
-      </span>
-    )}
-  </button>
-
-</div>
-</div>
-       </nav>
-
-      {/* MENU */}
-      {menuOpen && (
-        <>
-          <div
-            className="fixed inset-0 z-40"
-            onClick={() => setMenuOpen(false)}
-          />
-
-          <div className="
-            absolute top-[72px] left-6 w-[220px]
-            bg-white/90 backdrop-blur-md
-            shadow-xl shadow-black/10
-            border border-gray-200
-            rounded-xl
-            z-40
-            p-3
-            flex flex-col
-            gap-1
-            animate-menu
-          ">
-            <Link to="/" onClick={() => setMenuOpen(false)}> {t("home")} </Link>
-            <Link to="/catalog" onClick={() => setMenuOpen(false)}> {t("catalog")} </Link>
-            <Link to="/contact" onClick={() => setMenuOpen(false)}> {t("contact")} </Link>
+  </div>
+)}
           </div>
-        </>
-      )}
 
-      {/* CARRITO */}
+        </div>
+
+      </nav>
+      {/* MENU */}
+{menuOpen && (
+  <>
+    {/* overlay para cerrar */}
+    <div
+      className="fixed inset-0 z-40"
+      onClick={() => setMenuOpen(false)}
+    />
+
+    {/* menu */}
+    <div
+      className="
+      absolute top-[72px] left-6 w-[220px]
+bg-white/90 backdrop-blur-md
+shadow-xl shadow-black/10
+border border-gray-200
+rounded-xl
+z-40
+p-3
+flex flex-col
+gap-1
+animate-menu
+      "
+    >
+      <Link
+        to="/"
+        onClick={() => setMenuOpen(false)}
+        className="px-4 py-2 rounded-lg whitespace-nowrap hover:bg-[#7c9a7c]/10 hover:text-[#7c9a7c] hover:translate-x-1 transition"
+      >
+        {t("home")}
+      </Link>
+
+      <Link
+        to="/catalog"
+        onClick={() => setMenuOpen(false)}
+        className="px-4 py-2 rounded-lg whitespace-nowrap hover:bg-[#7c9a7c]/10 hover:text-[#7c9a7c] hover:translate-x-1 transition"
+      >
+        {t("catalog")}
+      </Link>
+
+      <Link
+        to="/contact"
+        onClick={() => setMenuOpen(false)}
+        className="px-4 py-2 rounded-lg whitespace-nowrap hover:bg-[#7c9a7c]/10 hover:text-[#7c9a7c] hover:translate-x-1 transition"
+      >
+        {t("contact")}
+      </Link>
+    </div>
+  </>
+)}
+
       <CartDrawer
         open={cartOpen}
         onClose={() => setCartOpen(false)}
