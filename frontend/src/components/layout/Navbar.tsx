@@ -76,7 +76,7 @@ export default function Navbar() {
         `}
       >
 
-        <div className="relative w-full h-full px-2 md:px-6 grid grid-cols-[1fr_auto_1fr] items-center">
+        <div className="relative w-full h-full px-1 md:px-6 grid grid-cols-[1fr_auto_1fr] items-center">
 
           {/* IZQUIERDA */}
           <div className="relative flex items-center gap-3 md:gap-6 justify-start">
@@ -129,12 +129,12 @@ export default function Navbar() {
 </div>
 
           {/* DERECHA */}
-          <div className="flex items-center gap-1 md:gap-6 justify-end">
+          <div className="flex items-center gap-2 md:gap-6 justify-end">
 
             {/* CARRITO */}
             <button
               onClick={() => setCartOpen(true)}
-              className="relative text-xl hover:opacity-70 transition -mr-2"
+              className="relative text-xl hover:opacity-70 transition"
             >
               🛒
 
@@ -167,7 +167,7 @@ export default function Navbar() {
 
             </div>
 
-          {isLoggedIn ? (
+           {isLoggedIn ? (
   <div className="flex items-center gap-2 sm:gap-4 ml-auto pr-2">
 
     {user?.role === "admin" && (
@@ -180,25 +180,11 @@ export default function Navbar() {
     )}
 
     <button
-      onClick={handleLogout}
-      className="font-medium hover:opacity-70 transition whitespace-nowrap"
-    >
-      Cerrar
-    </button>
-
-    {/* 👇 AHORA EL CARRITO AQUÍ */}
-    <button
-      onClick={() => setCartOpen(true)}
-      className="relative text-xl hover:opacity-70 transition"
-    >
-      🛒
-
-      {totalItems > 0 && (
-        <span className="absolute -top-2 -right-3 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-black px-1 text-[11px] font-semibold text-white">
-          {totalItems}
-        </span>
-      )}
-    </button>
+  onClick={handleLogout}
+  className="font-medium hover:opacity-70 transition whitespace-nowrap"
+>
+  Cerrar
+</button>
 
   </div>
 ) : (
