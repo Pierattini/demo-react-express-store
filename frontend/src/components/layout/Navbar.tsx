@@ -129,7 +129,7 @@ export default function Navbar() {
 </div>
 
           {/* DERECHA */}
-          <div className="flex items-center gap-2 md:gap-6 justify-end">
+          <div className="flex items-center gap-1 md:gap-6 justify-end">
 
             {/* CARRITO */}
             <button
