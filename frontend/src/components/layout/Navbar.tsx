@@ -129,79 +129,73 @@ export default function Navbar() {
 </div>
 
           {/* DERECHA */}
-          <div className="flex items-center gap-3 md:gap-6 justify-end pr-2">
+<div className="flex items-center gap-3 md:gap-6 justify-end pr-2">
 
-            {/* IDIOMA */}
-            <div className="hidden md:flex gap-2 text-sm font-medium items-center">
-
-              <button
-                onClick={() => i18n.changeLanguage("es")}
-                className={`${i18n.language === "es" ? "font-bold underline" : ""}`}
-              >
-                ES
-              </button>
-
-              <span>|</span>
-
-              <button
-                onClick={() => i18n.changeLanguage("en")}
-                className={`${i18n.language === "en" ? "font-bold underline" : ""}`}
-              >
-                EN
-              </button>
-
-            </div>
-
-           {isLoggedIn ? (
-  <div className="flex items-center gap-3 sm:gap-4">
-
-    {user?.role === "admin" && (
-      <Link
-        to="/admin"
-        className="font-medium text-black hover:opacity-70 transition"
-      >
-        Admin
-      </Link>
-    )}
-
+  {/* IDIOMA */}
+  <div className="hidden md:flex gap-2 text-sm font-medium items-center">
     <button
-      onClick={handleLogout}
-      className="font-medium hover:opacity-70 transition whitespace-nowrap"
+      onClick={() => i18n.changeLanguage("es")}
+      className={i18n.language === "es" ? "font-bold underline" : ""}
     >
-      Cerrar
+      ES
     </button>
 
-    {/* 🛒 MOVIDO AQUÍ */}
+    <span>|</span>
+
     <button
-      onClick={() => setCartOpen(true)}
-      className="relative text-xl hover:opacity-70 transition ml-2 mr-1"
+      onClick={() => i18n.changeLanguage("en")}
+      className={i18n.language === "en" ? "font-bold underline" : ""}
     >
-      🛒
-
-      {totalItems > 0 && (
-        <span className="absolute -top-2 -right-3 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-black px-1 text-[11px] font-semibold text-white">
-          {totalItems}
-        </span>
-      )}
+      EN
     </button>
-
   </div>
-) : (
-  <div className="flex items-center gap-2">
 
+  {/* LOGIN / ADMIN */}
+  {isLoggedIn ? (
+    <div className="flex items-center gap-3 sm:gap-4">
+
+      {user?.role === "admin" && (
+        <Link
+          to="/admin"
+          className="font-medium text-black hover:opacity-70 transition"
+        >
+          Admin
+        </Link>
+      )}
+
+      <button
+        onClick={handleLogout}
+        className="font-medium hover:opacity-70 transition whitespace-nowrap"
+      >
+        Cerrar
+      </button>
+
+    </div>
+  ) : (
     <button
       onClick={() => setLoginOpen(true)}
       className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition"
     >
       👤
     </button>
+  )}
 
-  </div>
-)}
-          </div>
+  {/* 🛒 CARRITO */}
+  <button
+    onClick={() => setCartOpen(true)}
+    className="relative text-xl hover:opacity-70 transition ml-2"
+  >
+    🛒
 
-        </div>
+    {totalItems > 0 && (
+      <span className="absolute -top-2 -right-3 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-black px-1 text-[11px] font-semibold text-white">
+        {totalItems}
+      </span>
+    )}
+  </button>
 
+</div>
+</div>
       </nav>
       {/* MENU */}
 {menuOpen && (
