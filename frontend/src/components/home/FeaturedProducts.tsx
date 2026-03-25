@@ -102,7 +102,15 @@ export default function FeaturedProducts() {
             </button>
           )}
 
-          <div className="grid grid-cols-3 gap-12 max-w-[1100px] mx-auto">
+          <div className="
+  grid
+  grid-cols-1
+  sm:grid-cols-2
+  md:grid-cols-3
+  gap-6
+  max-w-[1100px]
+  mx-auto
+">
             {visibleProducts.map((product) => (
 
               <Card
