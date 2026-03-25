@@ -171,7 +171,7 @@ export default function Navbar() {
             </div>
 
            {isLoggedIn ? (
-  <div className="flex items-center gap-2 sm:gap-4 ml-auto pr-2">
+  <div className="flex items-center gap-2 sm:gap-4">
 
     {user?.role === "admin" && (
       <Link
@@ -183,20 +183,45 @@ export default function Navbar() {
     )}
 
     <button
-  onClick={handleLogout}
-  className="font-medium hover:opacity-70 transition whitespace-nowrap"
->
-  Cerrar
-</button>
+      onClick={handleLogout}
+      className="font-medium hover:opacity-70 transition whitespace-nowrap"
+    >
+      Cerrar
+    </button>
+
+    {/* 🛒 MOVIDO AQUÍ */}
+    <button
+      onClick={() => setCartOpen(true)}
+      className="relative text-xl hover:opacity-70 transition ml-2"
+    >
+      🛒
+
+      {totalItems > 0 && (
+        <span className="absolute -top-2 -right-3 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-black px-1 text-[11px] font-semibold text-white">
+          {totalItems}
+        </span>
+      )}
+    </button>
 
   </div>
 ) : (
-  <button
-    onClick={() => setLoginOpen(true)}
-    className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition"
-  >
-    👤
-  </button>
+  <div className="flex items-center gap-2">
+
+    <button
+      onClick={() => setCartOpen(true)}
+      className="relative text-xl hover:opacity-70 transition"
+    >
+      🛒
+    </button>
+
+    <button
+      onClick={() => setLoginOpen(true)}
+      className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition"
+    >
+      👤
+    </button>
+
+  </div>
 )}
           </div>
 
