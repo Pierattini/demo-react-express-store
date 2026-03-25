@@ -67,7 +67,7 @@ export default function Banner() {
 
             <Button
               onClick={() => setOpenRegister(true)}
-              variant="secondary"
+              
               className="
                 w-full sm:w-auto
                 rounded-full px-8 py-3
