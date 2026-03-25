@@ -196,58 +196,36 @@ export default function Navbar() {
 
 </div>
 </div>
-      </nav>
+       </nav>
+
       {/* MENU */}
-{menuOpen && (
-  <>
-    {/* overlay para cerrar */}
-    <div
-      className="fixed inset-0 z-40"
-      onClick={() => setMenuOpen(false)}
-    />
+      {menuOpen && (
+        <>
+          <div
+            className="fixed inset-0 z-40"
+            onClick={() => setMenuOpen(false)}
+          />
 
-    {/* menu */}
-    <div
-      className="
-      absolute top-[72px] left-6 w-[220px]
-bg-white/90 backdrop-blur-md
-shadow-xl shadow-black/10
-border border-gray-200
-rounded-xl
-z-40
-p-3
-flex flex-col
-gap-1
-animate-menu
-      "
-    >
-      <Link
-        to="/"
-        onClick={() => setMenuOpen(false)}
-        className="px-4 py-2 rounded-lg whitespace-nowrap hover:bg-[#7c9a7c]/10 hover:text-[#7c9a7c] hover:translate-x-1 transition"
-      >
-        {t("home")}
-      </Link>
+          <div className="
+            absolute top-[72px] left-6 w-[220px]
+            bg-white/90 backdrop-blur-md
+            shadow-xl shadow-black/10
+            border border-gray-200
+            rounded-xl
+            z-40
+            p-3
+            flex flex-col
+            gap-1
+            animate-menu
+          ">
+            <Link to="/" onClick={() => setMenuOpen(false)}> {t("home")} </Link>
+            <Link to="/catalog" onClick={() => setMenuOpen(false)}> {t("catalog")} </Link>
+            <Link to="/contact" onClick={() => setMenuOpen(false)}> {t("contact")} </Link>
+          </div>
+        </>
+      )}
 
-      <Link
-        to="/catalog"
-        onClick={() => setMenuOpen(false)}
-        className="px-4 py-2 rounded-lg whitespace-nowrap hover:bg-[#7c9a7c]/10 hover:text-[#7c9a7c] hover:translate-x-1 transition"
-      >
-        {t("catalog")}
-      </Link>
-
-      <Link
-        to="/contact"
-        onClick={() => setMenuOpen(false)}
-        className="px-4 py-2 rounded-lg whitespace-nowrap hover:bg-[#7c9a7c]/10 hover:text-[#7c9a7c] hover:translate-x-1 transition"
-      >
-        {t("contact")}
-      </Link>
-    </div>
-  </>
-)}
-
+      {/* CARRITO */}
       <CartDrawer
         open={cartOpen}
         onClose={() => setCartOpen(false)}
