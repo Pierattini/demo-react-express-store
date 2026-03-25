@@ -12,9 +12,6 @@ export default function Banner() {
   const { site } = useSiteConfig();
   const [openRegister, setOpenRegister] = useState(false);
 
-  console.log(site);
-  console.log("Idioma actual:", i18n.language);
-
   return (
     <section className="relative min-h-[70vh] w-full overflow-hidden">
 
@@ -25,31 +22,45 @@ export default function Banner() {
         className="absolute inset-0 w-full h-full object-cover object-center"
       />
 
-      {/* overlay oscuro */}
+      {/* overlay */}
       <div className="absolute inset-0 bg-black/60"></div>
 
       {/* contenido */}
-      <div className="relative z-10 flex min-h-[70vh] items-start pt-64 px-6 md:px-12 text-white">
-        <div className="max-w-xl">
+      <div className="
+        relative z-10
+        flex flex-col
+        justify-center
+        min-h-[70vh]
+        px-6 md:px-12
+        text-white
+      ">
 
-          {/* TÍTULO */}
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
+        <div className="max-w-xl w-full">
+
+          {/* TITULO */}
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4">
             {i18n.language === "en"
               ? site?.brand_name_en || site?.brand_name
               : site?.brand_name || "Nombre de la marca"}
           </h1>
 
-          <p className="text-lg mb-8 text-white/80">
+          {/* SUBTITULO */}
+          <p className="text-sm sm:text-lg mb-6 text-white/80">
             {i18n.language === "en"
               ? site?.tagline_en || site?.slogan
               : site?.slogan || "Eslogan"}
           </p>
 
           {/* BOTONES */}
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="
+            flex flex-col
+            sm:flex-row
+            gap-4
+            w-full
+          ">
 
-            <Link to="/catalog">
-              <Button className="rounded-full px-8 py-3">
+            <Link to="/catalog" className="w-full sm:w-auto">
+              <Button className="w-full sm:w-auto rounded-full px-8 py-3">
                 {t("catalog")}
               </Button>
             </Link>
@@ -57,7 +68,12 @@ export default function Banner() {
             <Button
               onClick={() => setOpenRegister(true)}
               variant="secondary"
-              className="rounded-full px-8 py-3 bg-white/20 border border-white/30 text-white hover:bg-white hover:text-black"
+              className="
+                w-full sm:w-auto
+                rounded-full px-8 py-3
+                bg-white/20 border border-white/30 text-white
+                hover:bg-white hover:text-black
+              "
             >
               {t("createAccount")}
             </Button>
