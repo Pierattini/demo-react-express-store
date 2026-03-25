@@ -174,7 +174,7 @@ export default function Navbar() {
     {/* 🛒 MOVIDO AQUÍ */}
     <button
       onClick={() => setCartOpen(true)}
-      className="relative text-xl hover:opacity-70 transition ml-2"
+      className="relative text-xl hover:opacity-70 transition ml-2 mr-1"
     >
       🛒
 
