@@ -23,6 +23,7 @@
     "morgan": "^1.10.1",
     "multer": "^2.0.2",
     "pg": "^8.18.0",
+    "streamifier": "^0.1.1",
     "stripe": "^20.3.1"
   },
   "devDependencies": {
