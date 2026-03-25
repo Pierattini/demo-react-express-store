@@ -190,13 +190,6 @@ export default function Navbar() {
   <div className="flex items-center gap-2">
 
     <button
-      onClick={() => setCartOpen(true)}
-      className="relative text-xl hover:opacity-70 transition"
-    >
-      🛒
-    </button>
-
-    <button
       onClick={() => setLoginOpen(true)}
       className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition"
     >
