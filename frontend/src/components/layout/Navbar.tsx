@@ -31,12 +31,16 @@ export default function Navbar() {
   );
 
   useEffect(() => {
-    const loadSite = async () => {
+  const loadSite = async () => {
+    try {
       const config = await getSiteConfig();
       setSite(config);
-    };
-    loadSite();
-  }, []);
+    } catch (error) {
+      console.log("ERROR SITE CONFIG:", error);
+    }
+  };
+  loadSite();
+}, []);
 
   useEffect(() => {
     const handleScroll = () => {
