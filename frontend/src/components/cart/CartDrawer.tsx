@@ -34,7 +34,7 @@ export default function CartDrawer({ open, onClose }: Props) {
       {/* drawer */}
       <div
         className="
-        absolute right-3 sm:right-0 top-6
+        absolute right-0 top-6
         h-[calc(100vh-180px)] w-[420px]
         bg-white shadow-2xl
         rounded-l-xl
