@@ -76,7 +76,7 @@ export default function Navbar() {
         `}
       >
 
-        <div className="relative w-full h-full px-6 md:px-8 lg:px-4 grid grid-cols-[1fr_auto_1fr] items-center">
+        <div className="relative w-full h-full px-4 md:px-6 grid grid-cols-[1fr_auto_1fr] items-center">
 
           {/* IZQUIERDA */}
           <div className="relative flex items-center gap-3 md:gap-6 justify-start">
@@ -168,7 +168,7 @@ export default function Navbar() {
             </div>
 
            {isLoggedIn ? (
-  <div className="flex items-center gap-4">
+  <div className="flex items-center gap-2 sm:gap-4 ml-auto pr-2">
 
     {user?.role === "admin" && (
       <Link
