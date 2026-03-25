@@ -26,9 +26,9 @@ export default function Navbar() {
   const isLoggedIn = !!token;
 
   const totalItems = useMemo(
-    () => items.reduce((sum, item) => sum + item.quantity, 0),
-    [items]
-  );
+  () => (items || []).reduce((sum, item) => sum + item.quantity, 0),
+  [items]
+);
 
   useEffect(() => {
     const loadSite = async () => {

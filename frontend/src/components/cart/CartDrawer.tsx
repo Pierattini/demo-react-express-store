@@ -62,7 +62,7 @@ export default function CartDrawer({ open, onClose }: Props) {
         {/* contenido */}
         <div className="flex-1 overflow-y-auto p-6 pb-32">
 
-          {items.length === 0 && (
+          {(items?.length ?? 0) === 0 && (
             <p className="text-gray-500">
               Tu carrito está vacío
             </p>
