@@ -131,24 +131,6 @@ export default function Navbar() {
           {/* DERECHA */}
           <div className="flex items-center gap-2 md:gap-6 justify-end">
 
-            {/* CARRITO */}
-            <button
-              onClick={() => setCartOpen(true)}
-              className={`
-  relative text-xl hover:opacity-70 transition
-  ${isLoggedIn ? "ml-1" : "ml-2"}
-`}
-            >
-              🛒
-
-              {totalItems > 0 && (
-                <span className="absolute -top-2 -right-3 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-black px-1 text-[11px] font-semibold text-white">
-                  {totalItems}
-                </span>
-              )}
-
-            </button>
-
             {/* IDIOMA */}
             <div className="hidden md:flex gap-2 text-sm font-medium items-center">
 
