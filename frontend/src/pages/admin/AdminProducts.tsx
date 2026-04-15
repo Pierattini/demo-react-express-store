@@ -148,25 +148,24 @@ stock:v.stock
 }
 
  async function handleCreate() {
-
   try {
-
     const formData = new FormData();
 
     formData.append("name", newProduct.name);
     formData.append("description", newProduct.description);
     formData.append("price", String(newProduct.price));
     formData.append("stock", String(newProduct.stock));
+
     if (newProduct.image) {
-  formData.append("image", newProduct.image);
-}
+      formData.append("image", newProduct.image);
+    }
 
     formData.append(
       "variants",
       JSON.stringify(
-        variants.map(v => ({
+        variants.map((v) => ({
           color: v.color,
-          stock: v.stock
+          stock: v.stock,
         }))
       )
     );
@@ -177,15 +176,22 @@ stock:v.stock
       }
     });
 
-    const res = await fetch(`${API_URL}/api/products`, {
-  method: "POST",
-  body: formData,
-  credentials: "include",
-});
+    const token = localStorage.getItem("token");
 
-if (!res.ok) {
-  throw new Error("Error creando producto");
-}
+    const res = await fetch(`${API_URL}/api/products`, {
+      method: "POST",
+      body: formData,
+      credentials: "include",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) {
+      const text = await res.text();
+      console.error("Error creando producto:", text);
+      throw new Error("Error creando producto");
+    }
 
     await reloadProducts();
 
@@ -197,13 +203,10 @@ if (!res.ok) {
       image: null,
     });
 
-    setVariants([
-      { color: "#000000", stock: 0, image: null }
-    ]);
-
+    setVariants([{ color: "#000000", stock: 0, image: null }]);
     setOpenCreateModal(false);
-
-  } catch {
+  } catch (error) {
+    console.error(error);
     alert("Error creando producto");
   }
 }
