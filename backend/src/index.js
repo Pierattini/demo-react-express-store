@@ -22,19 +22,20 @@ const allowedOrigins = [
   "http://localhost:5173"
 ];
 
-/* CORS */
-app.use(cors({
+const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Origen no permitido por CORS"));
+      return callback(null, true);
     }
+    return callback(new Error("Origen no permitido por CORS"));
   },
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
-}));
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 app.use(express.json());
 
