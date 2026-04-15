@@ -19,6 +19,7 @@ export async function getAllProducts() {
       featured_order,
       active
     FROM products
+    WHERE active = true
     ORDER BY id
   `);
 
@@ -53,6 +54,23 @@ export async function getFeaturedProducts() {
 export async function createProduct(data) {
 
   const { 
+  name,
+  name_en,
+  description,
+  description_en,
+  price,
+  stock,
+  image_url,
+  colors = [],
+  is_featured = false,
+  featured_order = 0,
+  active = true
+} = data;
+
+  const { rows } = await pool.query(
+  `
+  INSERT INTO products 
+  (
     name,
     name_en,
     description,
@@ -60,41 +78,27 @@ export async function createProduct(data) {
     price,
     stock,
     image_url,
-    colors = [],
-    is_featured = false,
-    featured_order = 0
-  } = data;
-
-  const { rows } = await pool.query(
-    `
-    INSERT INTO products 
-    (
-      name,
-      name_en,
-      description,
-      description_en,
-      price,
-      stock,
-      image_url,
-      colors,
-      is_featured,
-      featured_order
-    )
-    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
-    RETURNING *
-    `,
+    colors,
+    is_featured,
+    featured_order,
+    active
+  )
+  VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
+  RETURNING *
+  `,
     [
-      name,
-      name_en,
-      description,
-      description_en,
-      price,
-      stock,
-      image_url,
-      JSON.stringify(colors),
-      is_featured,
-      featured_order
-    ]
+  name,
+  name_en,
+  description,
+  description_en,
+  price,
+  stock,
+  image_url,
+  JSON.stringify(colors),
+  is_featured,
+  featured_order,
+  active
+]
   );
 
   return rows[0];
