@@ -193,7 +193,7 @@ export async function getAllOrders() {
     `
     SELECT o.id, o.total, o.status, o.created_at, u.email
     FROM orders o
-    JOIN users u ON u.id = o.user_id
+    LEFT JOIN users u ON u.id = o.user_id 
     ORDER BY o.created_at DESC
     `
   );
