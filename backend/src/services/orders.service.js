@@ -166,14 +166,14 @@ export async function getOrderById(orderId) {
   let bankDetails = null;
 
   if (orderRows[0].payment_method === "bank_transfer") {
-    const { rows } = await pool.query(
-      `
-      SELECT bank_name, bank_account, bank_holder
-      FROM site_settings
-      ORDER BY id DESC
-      LIMIT 1
-      `
-    );
+  const { rows } = await pool.query(
+    `
+    SELECT bank_name, bank_account, bank_holder
+    FROM site_config
+    ORDER BY id DESC
+    LIMIT 1
+    `
+  );
 
     bankDetails = rows[0] || null;
   }
@@ -285,11 +285,11 @@ export async function cancelOrder(orderId) {
 
 export async function getBankDetails() {
   const { rows } = await pool.query(
-    `SELECT bank_name, bank_account, bank_holder
-     FROM site_settings
-     ORDER BY id DESC
-     LIMIT 1`
-  );
+  `SELECT bank_name, bank_account, bank_holder
+   FROM site_config
+   ORDER BY id DESC
+   LIMIT 1`
+);
 
   return rows[0] || null;
 }
