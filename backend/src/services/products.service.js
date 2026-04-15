@@ -23,7 +23,10 @@ export async function getAllProducts() {
     ORDER BY id
   `);
 
-  return rows;
+  return rows.map(product => ({
+  ...product,
+  price: Number(product.price)
+}));
 }
 
 export async function getFeaturedProducts() {
@@ -45,7 +48,10 @@ export async function getFeaturedProducts() {
     LIMIT 6
   `);
 
-  return rows;
+  return rows.map(product => ({
+  ...product,
+  price: Number(product.price)
+}));
 }
 
 /* ======================
