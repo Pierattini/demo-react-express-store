@@ -170,6 +170,8 @@ export async function updateProduct(req, res, next) {
     if (req.body.price) data.price = Number(req.body.price);
     if (req.body.stock) data.stock = Number(req.body.stock);
     if (req.body.active !== undefined) data.active = req.body.active;
+    if (req.body.is_featured !== undefined)
+       data.is_featured = req.body.is_featured;
 
     /* ======================
        VARIANTES
