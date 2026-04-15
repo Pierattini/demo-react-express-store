@@ -23,7 +23,7 @@ export interface Product {
   active: boolean;
   created_at: string;
 
-  featured?: boolean;
+  is_featured?: boolean;
 }
 
 /* ===============================

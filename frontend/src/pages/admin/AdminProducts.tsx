@@ -6,7 +6,7 @@ import { getProducts, deleteProduct, updateProduct } from "../../lib/products";
 import type { Product } from "../../lib/types";
 const API_URL = import.meta.env.VITE_API_URL;
 type ProductWithFeatured = Product & {
-  featured?: boolean;
+  is_featured?: boolean;
 };
 
 export default function AdminProducts() {
@@ -77,17 +77,29 @@ useState<Partial<EditableProduct>>({});
 }, []);
 
 
-  function toggleFeatured(id: number) {
-    const featuredCount = products.filter((p) => p.featured).length;
+  async function toggleFeatured(id: number) {
+  const product = products.find((p) => p.id === id);
+  if (!product) return;
 
-    setProducts((prev) =>
-      prev.map((p) => {
-        if (p.id !== id) return p;
-        if (!p.featured && featuredCount >= 6) return p;
-        return { ...p, featured: !p.featured };
-      })
-    );
+  const featuredCount = products.filter(
+    (p) => p.is_featured
+  ).length;
+
+  if (!product.is_featured && featuredCount >= 6) {
+    alert("Máximo 6 productos destacados");
+    return;
   }
+
+  try {
+    await updateProduct(id, {
+      is_featured: !product.is_featured,
+    });
+
+    await reloadProducts();
+  } catch {
+    alert("Error actualizando producto destacado");
+  }
+}
 
   async function handleDelete(id: number) {
   const confirmDelete = window.confirm("¿Eliminar producto?");
@@ -481,7 +493,7 @@ style={{backgroundColor:c.hex}}
                     <td className="p-4 text-center">
                       <input
                         type="checkbox"
-                        checked={!!product.featured}
+                        checked={!!product.is_featured}
                         onChange={() =>
                           toggleFeatured(product.id)
                         }
