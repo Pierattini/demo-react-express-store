@@ -116,8 +116,8 @@ export default function FeaturedProducts() {
               <Card
                 key={product.id}
                 onClick={() => setSelectedProduct(product)}
-                className="p-5 space-y-4 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group cursor-pointer"
-              >
+                className="h-full flex flex-col p-5 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group cursor-pointer"
+>
 
                 <div className="h-72 rounded-2xl overflow-hidden bg-gray-100">
 
@@ -143,17 +143,17 @@ export default function FeaturedProducts() {
 
                 </div>
 
-                <div className="space-y-2">
+                <div className="flex flex-col flex-1 justify-between pt-4">
+  <div>
+    <h3 className="font-medium text-gray-900 line-clamp-2 min-h-[48px]">
+      {getProductName(product)}
+    </h3>
+  </div>
 
-                  <h3 className="font-medium text-gray-900 line-clamp-2">
-                    {getProductName(product)}
-                  </h3>
-
-                  <p className="font-semibold text-lg text-gray-900">
-                    ${product.price}
-                  </p>
-
-                </div>
+  <p className="font-semibold text-lg text-gray-900 mt-4">
+    ${product.price}
+  </p>
+</div>
 
               </Card>
 
