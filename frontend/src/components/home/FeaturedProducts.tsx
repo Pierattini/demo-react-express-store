@@ -110,13 +110,14 @@ export default function FeaturedProducts() {
   w-full
   px-4
   justify-center
+  items-stretch
 ">
             {visibleProducts.map((product) => (
 
               <Card
-                key={product.id}
-                onClick={() => setSelectedProduct(product)}
-                className="h-full flex flex-col p-5 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group cursor-pointer"
+  key={product.id}
+  onClick={() => setSelectedProduct(product)}
+  className="w-full md:w-[320px] min-h-[430px] flex flex-col p-5 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group cursor-pointer"
 >
 
                 <div className="h-72 rounded-2xl overflow-hidden bg-gray-100">
@@ -144,8 +145,8 @@ export default function FeaturedProducts() {
                 </div>
 
                 <div className="flex flex-col flex-1 justify-between pt-4">
-  <div>
-    <h3 className="font-medium text-gray-900 line-clamp-2 min-h-[48px]">
+  <div className="min-h-[56px]">
+    <h3 className="font-medium text-gray-900 line-clamp-2">
       {getProductName(product)}
     </h3>
   </div>
