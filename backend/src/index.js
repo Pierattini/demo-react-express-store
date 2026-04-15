@@ -16,11 +16,24 @@ dotenv.config();
 
 const app = express();
 
+const allowedOrigins = [
+  "https://demo-react-express-store.vercel.app",
+  "https://demo-react-express-store-git-main-pierattinis-projects.vercel.app",
+  "http://localhost:5173"
+];
+
 /* CORS */
 app.use(cors({
-  origin: "*",
-  methods: ["GET","POST","PUT","DELETE","PATCH","OPTIONS"],
-  allowedHeaders: ["Content-Type","Authorization"]
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Origen no permitido por CORS"));
+    }
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 app.use(express.json());
@@ -41,7 +54,7 @@ app.use("/api/upload", uploadRoutes);
 
 app.use(notFoundMiddleware);
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 10000;
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
