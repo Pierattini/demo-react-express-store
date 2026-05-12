@@ -57,4 +57,12 @@ export type SiteConfig = {
   bank_name: string
   bank_account: string
   bank_holder: string
+
+  features_title?: string
+  feature1_label?: string
+  feature1_image?: string
+  feature2_label?: string
+  feature2_image?: string
+  feature3_label?: string
+  feature3_image?: string
 }

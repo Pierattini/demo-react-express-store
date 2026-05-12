@@ -1,6 +1,8 @@
 import Container from "../layout/Container";
 import Heading from "../ui/Heading";
 import { useTranslation } from "react-i18next";
+import { useContext } from "react";
+import { SiteConfigContext } from "../../context/SiteConfigProvider";
 
 import calidadImg from "../../assets/illustrations/calidad.png";
 import disenoImg from "../../assets/illustrations/diseno.png";
@@ -9,21 +11,27 @@ import durabilidadImg from "../../assets/illustrations/durabilidad.png";
 export default function HowWeWork() {
 
   const { t } = useTranslation();
+  const { site } = useContext(SiteConfigContext);
 
   const items = [
     {
       key: "quality",
-      image: calidadImg,
+      label: site?.feature1_label || t("quality"),
+      image: site?.feature1_image || calidadImg,
     },
     {
       key: "design",
-      image: disenoImg,
+      label: site?.feature2_label || t("design"),
+      image: site?.feature2_image || disenoImg,
     },
     {
       key: "durability",
-      image: durabilidadImg,
+      label: site?.feature3_label || t("durability"),
+      image: site?.feature3_image || durabilidadImg,
     },
   ];
+
+  const sectionTitle = site?.features_title || t("featuresTitle");
 
   return (
     <section className="py-28">
@@ -35,7 +43,7 @@ export default function HowWeWork() {
             level={2}
             className="text-3xl font-semibold text-gray-800"
           >
-            {t("featuresTitle")}
+            {sectionTitle}
           </Heading>
 
           <div className="w-16 h-[3px] bg-[#7c9a7c] mx-auto rounded-full" />
@@ -65,7 +73,7 @@ export default function HowWeWork() {
               <div className="flex justify-center mb-6">
                 <img
                   src={item.image}
-                  alt={t(item.key)}
+                  alt={item.label}
                   className="h-36 object-contain transition duration-500 group-hover:scale-110"
                 />
               </div>
@@ -75,7 +83,7 @@ export default function HowWeWork() {
 
               {/* Texto */}
               <h3 className="text-lg font-semibold text-gray-800 tracking-wide">
-                {t(item.key)}
+                {item.label}
               </h3>
 
             </div>

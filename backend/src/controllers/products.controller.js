@@ -26,7 +26,17 @@ export async function getProducts(req, res, next) {
 export async function createProduct(req, res, next) {
   try {
 
-    const { name, description, price, stock } = req.body;
+    const {
+      name,
+      description,
+      price,
+      stock,
+      features_title,
+      feature1_label,
+      feature2_label,
+      feature3_label,
+      feature4_label
+    } = req.body;
 
     const variants = req.body.variants
       ? JSON.parse(req.body.variants)
@@ -119,6 +129,29 @@ export async function createProduct(req, res, next) {
       image: variantImages[i] || null
     }));
 
+    /* ======================
+       IMÁGENES DE FEATURES
+    ====================== */
+
+    const featureImageUrls = {};
+
+    for (let i = 1; i <= 4; i++) {
+      const file = files.find(f => f.fieldname === `feature${i}_image`);
+      if (file) {
+        const result = await new Promise((resolve, reject) => {
+          const stream = cloudinary.uploader.upload_stream(
+            { folder: "productos/features" },
+            (error, result) => {
+              if (error) reject(error);
+              else resolve(result);
+            }
+          );
+          stream.end(file.buffer);
+        });
+        featureImageUrls[`feature${i}_image`] = result.secure_url;
+      }
+    }
+
     const product = await createProductService({
       name,
       name_en,
@@ -127,7 +160,16 @@ export async function createProduct(req, res, next) {
       price,
       stock: stock ?? 0,
       image_url,
-      colors
+      colors,
+      features_title: features_title || null,
+      feature1_label: feature1_label || null,
+      feature1_image: featureImageUrls.feature1_image || null,
+      feature2_label: feature2_label || null,
+      feature2_image: featureImageUrls.feature2_image || null,
+      feature3_label: feature3_label || null,
+      feature3_image: featureImageUrls.feature3_image || null,
+      feature4_label: feature4_label || null,
+      feature4_image: featureImageUrls.feature4_image || null,
     });
 
     res.status(201).json(product);
@@ -172,6 +214,12 @@ export async function updateProduct(req, res, next) {
     if (req.body.active !== undefined) data.active = req.body.active;
     if (req.body.is_featured !== undefined)
        data.is_featured = req.body.is_featured;
+
+    if (req.body.features_title !== undefined) data.features_title = req.body.features_title;
+    if (req.body.feature1_label !== undefined) data.feature1_label = req.body.feature1_label;
+    if (req.body.feature2_label !== undefined) data.feature2_label = req.body.feature2_label;
+    if (req.body.feature3_label !== undefined) data.feature3_label = req.body.feature3_label;
+    if (req.body.feature4_label !== undefined) data.feature4_label = req.body.feature4_label;
 
     /* ======================
        VARIANTES
@@ -248,6 +296,27 @@ export async function updateProduct(req, res, next) {
 
       data.image_url = result.secure_url;
 
+    }
+
+    /* ======================
+       IMÁGENES DE FEATURES (UPDATE)
+    ====================== */
+
+    for (let i = 1; i <= 4; i++) {
+      const file = files.find(f => f.fieldname === `feature${i}_image`);
+      if (file) {
+        const result = await new Promise((resolve, reject) => {
+          const stream = cloudinary.uploader.upload_stream(
+            { folder: "productos/features" },
+            (error, result) => {
+              if (error) reject(error);
+              else resolve(result);
+            }
+          );
+          stream.end(file.buffer);
+        });
+        data[`feature${i}_image`] = result.secure_url;
+      }
     }
 
     const updated = await updateProductService(id, data);

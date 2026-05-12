@@ -23,12 +23,21 @@ const modal: React.CSSProperties = {
 
 const closeBtn: React.CSSProperties = {
   position: "absolute",
-  top: 14,
-  right: 18,
-  border: "none",
-  background: "transparent",
-  fontSize: 22,
+  top: 16,
+  right: 16,
+  border: "1px solid #e5e7eb",
+  background: "white",
+  fontSize: 18,
   cursor: "pointer",
+  borderRadius: "50%",
+  width: 40,
+  height: 40,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  zIndex: 10,
+  boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+  transition: "all 0.2s",
 };
 
 export default function PromoModal({ onClose }: { onClose: () => void }) {

@@ -32,7 +32,7 @@ export default function CartFooter({ onOpenCheckout }: Props) {
         <span>Total</span>
 
         <span>
-          ${total.toFixed(2)}
+          ${Math.round(total)}
         </span>
 
       </div>

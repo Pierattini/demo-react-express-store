@@ -28,9 +28,13 @@ export type CheckoutResponse = {
 
 export type CartContextType = {
   items: CartItem[];
-  add: (productId: number, quantity?: number) => void;
-  update: (productId: number, quantity: number) => void;
-  remove: (productId: number) => void;
+  add: (
+    productId: number,
+    quantity?: number,
+    color?: { hex?: string; name?: string }
+  ) => void;
+  update: (productId: number, quantity: number, colorHex?: string) => void;
+  remove: (productId: number, colorHex?: string) => void;
   clear: () => void;
   checkout: (data: ShippingData) => Promise<CheckoutResponse>;
 };

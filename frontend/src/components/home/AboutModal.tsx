@@ -22,9 +22,10 @@ export default function AboutModal({ title, sections, onClose }: Props) {
         {/* Botón cerrar */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 text-gray-400 hover:text-black transition"
+          className="absolute top-5 right-5 z-10 bg-white hover:bg-gray-100 rounded-full p-2.5 transition text-gray-600 hover:text-gray-900 shadow-sm border border-gray-200"
+          aria-label="Cerrar modal"
         >
-          <X size={22} />
+          <X size={20} />
         </button>
 
         <div className="p-12 space-y-12">
