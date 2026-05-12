@@ -45,16 +45,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
     <CartContext.Provider
       value={{
         items,
-        add: (id, q = 1) => {
-          addToCart(id, q);
+        add: (id, q = 1, color) => {
+          addToCart(id, q, color);
           sync();
         },
-        update: (id, q) => {
-          updateCartItem(id, q);
+        update: (id, q, colorHex) => {
+          updateCartItem(id, q, colorHex);
           sync();
         },
-        remove: (id) => {
-          removeFromCart(id);
+        remove: (id, colorHex) => {
+          removeFromCart(id, colorHex);
           sync();
         },
         clear,

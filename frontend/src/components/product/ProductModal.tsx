@@ -3,6 +3,7 @@ import { useCart } from "../../hooks/useCart";
 import { ShoppingCart } from "lucide-react";
 import { getProductName, getProductDescription } from "../../utils/translate";
 import { useState } from "react";
+import { getProductColorOptions } from "../../utils/productColorOptions";
 
 type Props = {
   product: Product;
@@ -12,6 +13,7 @@ type Props = {
 export default function ProductModal({ product, onClose }: Props) {
 
   const { add } = useCart();
+  const safeColors = getProductColorOptions(product);
 
   const [selectedImage, setSelectedImage] = useState(product.image);
   const [selectedColor, setSelectedColor] = useState<number | null>(null);
@@ -23,7 +25,8 @@ export default function ProductModal({ product, onClose }: Props) {
         {/* Cerrar */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-black transition text-xl"
+          className="absolute top-3 right-3 z-10 bg-white hover:bg-gray-100 rounded-full p-2.5 transition text-lg text-gray-600 hover:text-gray-900 shadow-sm border border-gray-200"
+          aria-label="Cerrar modal"
         >
           ✕
         </button>
@@ -54,10 +57,10 @@ export default function ProductModal({ product, onClose }: Props) {
           </p>
 
           {/* COLORES */}
-          {product.colors && product.colors.length > 0 && (
+          {safeColors.length > 0 && (
             <div className="flex gap-3 mt-4">
 
-              {product.colors.map((c, i) => (
+              {safeColors.map((c, i) => (
                 <button
                   key={i}
                   onClick={(e)=>{
@@ -92,7 +95,15 @@ export default function ProductModal({ product, onClose }: Props) {
           {/* Botón agregar */}
           <button
             onClick={() => {
-              add(product.id, 1);
+              const color =
+                selectedColor !== null && safeColors[selectedColor]
+                  ? {
+                      hex: safeColors[selectedColor].hex,
+                      name: safeColors[selectedColor].name,
+                    }
+                  : undefined;
+
+              add(product.id, 1, color);
               onClose();
             }}
             className="

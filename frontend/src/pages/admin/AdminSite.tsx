@@ -6,7 +6,7 @@ import { CheckCircle2, Image as ImageIcon, Loader2, UploadCloud } from "lucide-r
 import DashboardLayout from "../../components/layout/DashboardLayout"; 
 import AddressAutocomplete from "../../components/ui/AddressAutocomplete";
 import { uploadImage } from "../../lib/upload";
-type UploadField = "hero_image" | "about_image" | "logo";
+type UploadField = "hero_image" | "about_image" | "logo" | "feature1_image" | "feature2_image" | "feature3_image";
 /* ========= VALIDATIONS ========= */
 const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
@@ -246,7 +246,15 @@ export default function AdminSite() {
 
   bank_name: "",
   bank_account: "",
-  bank_holder: ""
+  bank_holder: "",
+
+  features_title: "",
+  feature1_label: "",
+  feature1_image: "",
+  feature2_label: "",
+  feature2_image: "",
+  feature3_label: "",
+  feature3_image: "",
 });
   const [uploadingField, setUploadingField] = useState<UploadField | null>(null);
 
@@ -586,6 +594,44 @@ export default function AdminSite() {
     value={form.bank_holder || ""}
     onChange={handleChange}
   />
+</div>
+
+<div className="border-t pt-8 space-y-6">
+  <h3 className="text-lg font-semibold text-gray-900">
+    Sección "Qué nos diferencia"
+  </h3>
+  <p className="text-sm text-gray-500">Personalizá el título, los nombres y las imágenes de cada tarjeta.</p>
+
+  <TextField
+    label="Título de la sección"
+    name="features_title"
+    value={form.features_title || ""}
+    placeholder="Ej: Qué nos diferencia"
+    onChange={handleChange}
+  />
+
+  <div className="grid md:grid-cols-3 gap-6">
+    {([1, 2, 3] as const).map((n) => (
+      <div key={n} className="border border-gray-100 rounded-xl p-4 space-y-4 bg-gray-50">
+        <p className="text-sm font-semibold text-gray-700">Tarjeta {n}</p>
+        <TextField
+          label="Nombre"
+          name={`feature${n}_label` as keyof import("../../types/SiteConfig").SiteConfig}
+          value={(form[`feature${n}_label` as keyof typeof form] as string) || ""}
+          placeholder="Ej: Calidad"
+          onChange={handleChange}
+        />
+        <ImageUploadField
+          label="Imagen"
+          help="Ilustración cuadrada recomendada"
+          imageUrl={(form[`feature${n}_image` as keyof typeof form] as string) || ""}
+          uploading={uploadingField === `feature${n}_image`}
+          inputId={`feature${n}ImageUpload`}
+          onUpload={(e) => handleImageUpload(e, `feature${n}_image` as UploadField)}
+        />
+      </div>
+    ))}
+  </div>
 </div>
 
         {/* Save */}

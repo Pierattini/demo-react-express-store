@@ -8,6 +8,13 @@ import { httpPost } from "./http";
 export type CartItem = {
   product_id: number;
   quantity: number;
+  color_hex?: string;
+  color_name?: string;
+};
+
+export type CartColor = {
+  hex?: string;
+  name?: string;
 };
 
 export type CheckoutResponse = {
@@ -38,6 +45,17 @@ function saveCart(items: CartItem[]) {
   localStorage.setItem(CART_KEY, JSON.stringify(items));
 }
 
+function normalizeColorHex(hex?: string) {
+  return (hex || "").trim().toLowerCase();
+}
+
+function sameVariant(item: CartItem, productId: number, colorHex?: string) {
+  return (
+    item.product_id === productId &&
+    normalizeColorHex(item.color_hex) === normalizeColorHex(colorHex)
+  );
+}
+
 /* ======================================================
    API DEL CARRITO (PUBLICA)
 ====================================================== */
@@ -48,17 +66,22 @@ export function getCart(): CartItem[] {
 }
 
 // agregar producto
-export function addToCart(product_id: number, quantity = 1) {
+export function addToCart(product_id: number, quantity = 1, color?: CartColor) {
   const cart = readCart();
+  const colorHex = normalizeColorHex(color?.hex);
+  const colorName = color?.name?.trim();
 
-  const existing = cart.find(
-    (item) => item.product_id === product_id
-  );
+  const existing = cart.find((item) => sameVariant(item, product_id, colorHex));
 
   if (existing) {
     existing.quantity += quantity;
   } else {
-    cart.push({ product_id, quantity });
+    cart.push({
+      product_id,
+      quantity,
+      ...(colorHex ? { color_hex: colorHex } : {}),
+      ...(colorName ? { color_name: colorName } : {}),
+    });
   }
 
   saveCart(cart);
@@ -67,18 +90,17 @@ export function addToCart(product_id: number, quantity = 1) {
 // actualizar cantidad
 export function updateCartItem(
   product_id: number,
-  quantity: number
+  quantity: number,
+  colorHex?: string
 ) {
   const cart = readCart();
 
-  const item = cart.find(
-    (i) => i.product_id === product_id
-  );
+  const item = cart.find((i) => sameVariant(i, product_id, colorHex));
 
   if (!item) return;
 
   if (quantity <= 0) {
-    removeFromCart(product_id);
+    removeFromCart(product_id, colorHex);
     return;
   }
 
@@ -87,9 +109,9 @@ export function updateCartItem(
 }
 
 // eliminar item
-export function removeFromCart(product_id: number) {
+export function removeFromCart(product_id: number, colorHex?: string) {
   const cart = readCart().filter(
-    (i) => i.product_id !== product_id
+    (i) => !sameVariant(i, product_id, colorHex)
   );
   saveCart(cart);
 }
@@ -113,10 +135,18 @@ export async function checkout(data: {
   };
   paymentMethod: "bank_transfer" | "stripe"; // ✅ aquí
 }): Promise<CheckoutResponse> {
+  const normalizedItems = data.items.map((item) => ({
+    product_id: item.product_id,
+    quantity: item.quantity,
+    ...(item.color_name || item.color_hex
+      ? { color: item.color_name || item.color_hex }
+      : {}),
+  }));
+
   return httpPost<CheckoutResponse>(
     "/orders",
     {
-      items: data.items,
+      items: normalizedItems,
       shipping: data.shippingData,
       payment_method: data.paymentMethod,
     },

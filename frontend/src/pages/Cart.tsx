@@ -10,10 +10,13 @@ import Card from "../components/ui/Card";
 import Section from "../components/layout/Section";
 import EmptyState from "../components/ui/EmptyState";
 import Heading from "../components/ui/Heading";
+import { getFriendlyColorName } from "../utils/colorName";
 
 type DetailedCartItem = {
   product: Product;
   quantity: number;
+  colorHex?: string;
+  colorName?: string;
 };
 
 export default function CartPage() {
@@ -47,6 +50,8 @@ export default function CartPage() {
         return {
           product,
           quantity: item.quantity,
+          colorHex: item.color_hex,
+          colorName: item.color_name,
         };
       })
       .filter(Boolean) as DetailedCartItem[];
@@ -120,18 +125,27 @@ export default function CartPage() {
 
         <ul className="space-y-4">
 
-          {detailedItems.map(({ product, quantity }) => (
+          {detailedItems.map(({ product, quantity, colorHex, colorName }) => (
 
             <li
-              key={product.id}
+              key={`${product.id}-${colorHex || "default"}`}
               className="grid grid-cols-[1fr_auto_auto] items-center gap-4 border-b pb-4 last:border-none"
             >
 
               <div>
                 <p className="font-medium">{product.name}</p>
                 <p className="text-sm text-gray-500">
-                  ${product.price.toFixed(2)} c/u
+                  ${Math.round(product.price)} c/u
                 </p>
+                {colorHex && (
+                  <p className="mt-1 flex items-center gap-2 text-xs text-gray-500">
+                    <span
+                      className="h-3.5 w-3.5 rounded-full border border-gray-300"
+                      style={{ backgroundColor: colorHex }}
+                    />
+                    <span>Color: {getFriendlyColorName(colorHex, colorName)}</span>
+                  </p>
+                )}
               </div>
 
               <Input
@@ -142,14 +156,15 @@ export default function CartPage() {
                 onChange={(e) =>
                   cart.update(
                     product.id,
-                    Math.min(Number(e.target.value), product.stock)
+                    Math.min(Number(e.target.value), product.stock),
+                    colorHex
                   )
                 }
                 className="w-20"
               />
 
               <Button
-                onClick={() => cart.remove(product.id)}
+                onClick={() => cart.remove(product.id, colorHex)}
                 className="bg-green-100 text-green-700 hover:bg-green-200 px-3 py-1 text-xs"
               >
                 {t("remove")}
@@ -165,7 +180,7 @@ export default function CartPage() {
           <span>{t("total")}</span>
 
           <span className="text-[#7C3AED]">
-            ${total.toFixed(2)}
+            ${Math.round(total)}
           </span>
         </div>
 
@@ -265,7 +280,7 @@ export default function CartPage() {
               <span>{t("total")}</span>
 
               <strong className="text-[#7C3AED]">
-                ${total.toFixed(2)}
+                ${Math.round(total)}
               </strong>
 
             </div>

@@ -1,0 +1,10 @@
+ALTER TABLE products
+  ADD COLUMN IF NOT EXISTS features_title  TEXT,
+  ADD COLUMN IF NOT EXISTS feature1_label  TEXT,
+  ADD COLUMN IF NOT EXISTS feature1_image  TEXT,
+  ADD COLUMN IF NOT EXISTS feature2_label  TEXT,
+  ADD COLUMN IF NOT EXISTS feature2_image  TEXT,
+  ADD COLUMN IF NOT EXISTS feature3_label  TEXT,
+  ADD COLUMN IF NOT EXISTS feature3_image  TEXT,
+  ADD COLUMN IF NOT EXISTS feature4_label  TEXT,
+  ADD COLUMN IF NOT EXISTS feature4_image  TEXT;

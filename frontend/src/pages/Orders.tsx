@@ -28,7 +28,7 @@ export default function Orders() {
       )
       .finally(() => setLoading(false));
 
-  }, []);
+  }, [t]);
 
   if (loading) {
     return <OrdersSkeleton />;

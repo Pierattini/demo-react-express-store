@@ -29,6 +29,9 @@ type ErrorPayload = {
   error?: string;
 };
 
+const MAX_RETRIES = 2;
+const RETRY_DELAY_MS = 800;
+
 /* ======================================================
    HELPERS INTERNOS
 ====================================================== */
@@ -43,6 +46,38 @@ function extractErrorMessage(data: unknown, status: number): string {
   }
 
   return `Error HTTP ${status}`;
+}
+
+function wait(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function isTransientFetchError(error: unknown): boolean {
+  return error instanceof TypeError;
+}
+
+async function fetchWithRetry(
+  input: RequestInfo | URL,
+  init: RequestInit,
+  retries = MAX_RETRIES
+) {
+  let lastError: unknown;
+
+  for (let attempt = 0; attempt <= retries; attempt += 1) {
+    try {
+      return await fetch(input, init);
+    } catch (error) {
+      lastError = error;
+
+      if (!isTransientFetchError(error) || attempt === retries) {
+        break;
+      }
+
+      await wait(RETRY_DELAY_MS * (attempt + 1));
+    }
+  }
+
+  throw lastError;
 }
 
 /* ======================================================
@@ -64,17 +99,29 @@ export async function http<T>(
 
   const isFormData = rest.body instanceof FormData;
 //console.log("REQUEST URL:", `${API_URL}${url}`);
-const response = await fetch(`${API_URL}${url}`, {
-  method,
-  ...rest,
-  headers: {
-  ...(method !== "GET" && !isFormData
-    ? { "Content-Type": "application/json" }
-    : {}),
-  ...(auth && token ? { Authorization: `Bearer ${token}` } : {}),
-  ...(headers || {}),
-},
-});
+  let response: Response;
+
+  try {
+    response = await fetchWithRetry(`${API_URL}${url}`, {
+      method,
+      ...rest,
+      headers: {
+        ...(method !== "GET" && !isFormData
+          ? { "Content-Type": "application/json" }
+          : {}),
+        ...(auth && token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(headers || {}),
+      },
+    });
+  } catch (error) {
+    if (isTransientFetchError(error)) {
+      throw new Error(
+        "No se pudo conectar con el servidor. Intenta de nuevo en unos segundos."
+      );
+    }
+
+    throw error;
+  }
 
 
   /* ======================================================

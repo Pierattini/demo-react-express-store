@@ -2,6 +2,7 @@ import { useCart } from "../../hooks/useCart";
 import { useProducts } from "../../hooks/useProducts";
 import { useNavigate } from "react-router-dom";
 import type { Product } from "../../lib/types";
+import { getFriendlyColorName } from "../../utils/colorName";
 
 type Props = {
   onOpenProduct: (product: Product) => void;
@@ -27,17 +28,27 @@ export default function CartItemsList({
 
         if (!product) return null;
 
+        const colorHex = (item.color_hex || "").trim().toLowerCase();
+        const productColor = product.colors?.find(
+          (c) => (c.hex || "").trim().toLowerCase() === colorHex
+        );
+        const colorLabel = getFriendlyColorName(
+          item.color_hex,
+          item.color_name || productColor?.name
+        );
+        const displayImage = productColor?.image || product.image;
+
         const subtotal = product.price * item.quantity;
 
         return (
 
           <div
-            key={item.product_id}
+            key={`${item.product_id}-${item.color_hex || "default"}`}
             className="flex gap-4 mb-6 border-b pb-4"
           >
 
             <img
-              src={product.image}
+              src={displayImage}
               alt={product.name}
               className="w-16 h-16 object-cover rounded-lg cursor-pointer"
               onClick={() => onOpenProduct(product)}
@@ -56,14 +67,24 @@ export default function CartItemsList({
               </p>
 
               <p className="text-sm text-gray-500">
-                ${product.price.toFixed(2)}
+                ${Math.round(product.price)}
               </p>
+
+              {item.color_hex && (
+                <div className="mt-1 flex items-center gap-2 text-xs text-gray-500">
+                  <span
+                    className="h-3.5 w-3.5 rounded-full border border-gray-300"
+                    style={{ backgroundColor: item.color_hex }}
+                  />
+                  <span>Color: {colorLabel}</span>
+                </div>
+              )}
 
               <div className="flex items-center gap-2 mt-2">
 
                 <button
                   onClick={() =>
-                    update(item.product_id, item.quantity - 1)
+                    update(item.product_id, item.quantity - 1, item.color_hex)
                   }
                   className="px-2 py-1 border rounded"
                 >
@@ -74,7 +95,7 @@ export default function CartItemsList({
 
                 <button
                   onClick={() =>
-                    update(item.product_id, item.quantity + 1)
+                    update(item.product_id, item.quantity + 1, item.color_hex)
                   }
                   className="px-2 py-1 border rounded"
                 >
@@ -88,12 +109,12 @@ export default function CartItemsList({
             <div className="text-right">
 
               <p className="font-medium">
-                ${subtotal.toFixed(2)}
+                ${Math.round(subtotal)}
               </p>
 
               <button
                 onClick={() =>
-                  remove(item.product_id)
+                  remove(item.product_id, item.color_hex)
                 }
                 className="text-red-500 text-sm hover:underline"
               >

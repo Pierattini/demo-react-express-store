@@ -70,6 +70,14 @@ export async function getSiteConfig(): Promise<SiteConfig> {
 
     bank_name: data.bank_name,
     bank_account: data.bank_account,
-    bank_holder: data.bank_holder
+    bank_holder: data.bank_holder,
+
+    features_title: data.features_title,
+    feature1_label: data.feature1_label,
+    feature1_image: data.feature1_image,
+    feature2_label: data.feature2_label,
+    feature2_image: data.feature2_image,
+    feature3_label: data.feature3_label,
+    feature3_image: data.feature3_image,
   };
 }
