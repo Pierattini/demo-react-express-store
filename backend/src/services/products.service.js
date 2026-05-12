@@ -17,16 +17,7 @@ export async function getAllProducts() {
       colors,
       is_featured,
       featured_order,
-      active,
-      features_title,
-      feature1_label,
-      feature1_image,
-      feature2_label,
-      feature2_image,
-      feature3_label,
-      feature3_image,
-      feature4_label,
-      feature4_image
+      active
     FROM products
     WHERE active = true
     ORDER BY id
@@ -80,15 +71,6 @@ export async function createProduct(data) {
   is_featured = false,
   featured_order = 0,
   active = true
- // features_title = null,
-  //feature1_label = null,
- // feature1_image = null,
-  //feature2_label = null,
- // feature2_image = null,
-  //feature3_label = null,
- // feature3_image = null,
- // feature4_label = null,
-//  feature4_image = null
 } = data;
 
   const { rows } = await pool.query(
@@ -106,15 +88,6 @@ export async function createProduct(data) {
     is_featured,
     featured_order,
     active
-    //features_title,
-    //feature1_label,
-    //feature1_image,
-    //feature2_label,
-    //feature2_image,
-   //feature3_label,
-    //feature3_image,
-   // feature4_label,
-   // feature4_image
   )
   VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20)
   RETURNING *
@@ -131,15 +104,6 @@ export async function createProduct(data) {
   is_featured,
   featured_order,
   active
- // features_title,
-  //feature1_label,
- // feature1_image,
- // feature2_label,
- // feature2_image,
- // feature3_label,
-  //feature3_image,
- // feature4_label,
- // feature4_image
 ]
   );
 
